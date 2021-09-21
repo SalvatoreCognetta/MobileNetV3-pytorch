@@ -1,1 +1,1 @@
-# Neural Network project - ImageNet3 implementation
+# Neural Network project - MobileNet3 implementation
