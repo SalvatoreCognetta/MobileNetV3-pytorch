@@ -1,0 +1,90 @@
+[
+    {
+        "k": "3",
+        "exp_size": "16",
+        "out": "16",
+		"se": "True",
+		"nl": "ReLU",
+		"s": "2"
+    },
+    {
+        "k": "3",
+        "exp_size": "72",
+        "out": "24",
+		"se": "False",
+		"nl": "ReLU",
+		"s": "2"
+    },
+    {
+        "k": "3",
+        "exp_size": "88",
+        "out": "24",
+		"se": "False",
+		"nl": "ReLU",
+		"s": "1"
+    },
+    {
+        "k": "5",
+        "exp_size": "96",
+        "out": "40",
+		"se": "True",
+		"nl": "h-swish",
+		"s": "2"
+    },
+    {
+        "k": "5",
+        "exp_size": "240",
+        "out": "40",
+		"se": "True",
+		"nl": "h-swish",
+		"s": "1"
+    },
+    {
+        "k": "5",
+        "exp_size": "240",
+        "out": "40",
+		"se": "True",
+		"nl": "h-swish",
+		"s": "1"
+    },
+    {
+        "k": "5",
+        "exp_size": "120",
+        "out": "48",
+		"se": "True",
+		"nl": "h-swish",
+		"s": "1"
+    },
+    {
+        "k": "5",
+        "exp_size": "144",
+        "out": "48",
+		"se": "True",
+		"nl": "h-swish",
+		"s": "1"
+    },
+    {
+        "k": "5",
+        "exp_size": "288",
+        "out": "96",
+		"se": "True",
+		"nl": "h-swish",
+		"s": "2"
+    },
+    {
+        "k": "5",
+        "exp_size": "288",
+        "out": "576",
+		"se": "True",
+		"nl": "h-swish",
+		"s": "1"
+    },
+    {
+        "k": "5",
+        "exp_size": "288",
+        "out": "576",
+		"se": "True",
+		"nl": "h-swish",
+		"s": "1"
+    }
+]
