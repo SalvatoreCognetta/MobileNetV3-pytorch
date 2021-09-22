@@ -1,88 +1,99 @@
 [
     {
-        "k": "3",
+        "kernel": "3",
+		"input_size": "16", 
         "exp_size": "16",
-        "out": "16",
+        "out_size": "16",
 		"se": "True",
 		"nl": "relu",
 		"s": "2"
     },
     {
-        "k": "3",
+        "kernel": "3",
+		"input_size": "16", 
         "exp_size": "72",
-        "out": "24",
+        "out_size": "24",
 		"se": "False",
 		"nl": "relu",
 		"s": "2"
     },
     {
-        "k": "3",
+        "kernel": "3",
+		"input_size": "24", 
         "exp_size": "88",
-        "out": "24",
+        "out_size": "24",
 		"se": "False",
 		"nl": "relu",
 		"s": "1"
     },
     {
-        "k": "5",
+        "kernel": "5",
+		"input_size": "24", 
         "exp_size": "96",
-        "out": "40",
+        "out_size": "40",
 		"se": "True",
 		"nl": "h-swish",
 		"s": "2"
     },
     {
-        "k": "5",
+        "kernel": "5",
+		"input_size": "40", 
         "exp_size": "240",
-        "out": "40",
+        "out_size": "40",
 		"se": "True",
 		"nl": "h-swish",
 		"s": "1"
     },
     {
-        "k": "5",
+        "kernel": "5",
+		"input_size": "40", 
         "exp_size": "240",
-        "out": "40",
+        "out_size": "40",
 		"se": "True",
 		"nl": "h-swish",
 		"s": "1"
     },
     {
-        "k": "5",
+        "kernel": "5",
+		"input_size": "40", 
         "exp_size": "120",
-        "out": "48",
+        "out_size": "48",
 		"se": "True",
 		"nl": "h-swish",
 		"s": "1"
     },
     {
-        "k": "5",
+        "kernel": "5",
+		"input_size": "48", 
         "exp_size": "144",
-        "out": "48",
+        "out_size": "48",
 		"se": "True",
 		"nl": "h-swish",
 		"s": "1"
     },
     {
-        "k": "5",
+        "kernel": "5",
+		"input_size": "48", 
         "exp_size": "288",
-        "out": "96",
+        "out_size": "96",
 		"se": "True",
 		"nl": "h-swish",
 		"s": "2"
     },
     {
-        "k": "5",
-        "exp_size": "288",
-        "out": "576",
+        "kernel": "5",
+		"input_size": "96", 
+        "exp_size": "576",
+        "out_size": "96",
 		"se": "True",
 		"nl": "h-swish",
 		"s": "1"
     },
     {
-        "k": "5",
-        "exp_size": "288",
-        "out": "576",
+        "kernel": "5",
+		"input_size": "96", 
+        "exp_size": "576",
+        "out_size": "96",
 		"se": "True",
 		"nl": "h-swish",
 		"s": "1"
