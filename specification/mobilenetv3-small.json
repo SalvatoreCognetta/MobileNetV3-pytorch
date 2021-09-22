@@ -4,7 +4,7 @@
         "exp_size": "16",
         "out": "16",
 		"se": "True",
-		"nl": "ReLU",
+		"nl": "relu",
 		"s": "2"
     },
     {
@@ -12,7 +12,7 @@
         "exp_size": "72",
         "out": "24",
 		"se": "False",
-		"nl": "ReLU",
+		"nl": "relu",
 		"s": "2"
     },
     {
@@ -20,7 +20,7 @@
         "exp_size": "88",
         "out": "24",
 		"se": "False",
-		"nl": "ReLU",
+		"nl": "relu",
 		"s": "1"
     },
     {
