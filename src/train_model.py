@@ -41,7 +41,9 @@ if __name__ == "__main__":
     NUM_GPUS  = int(conf['trainer']['num_gpus'])
     MAX_EPOCHS  = int(conf['hparams']['num_epochs'])
 
-    assert NUM_GPUS <= AVAIL_GPUS
+    if NUM_GPUS > AVAIL_GPUS:
+        NUM_GPUS = AVAIL_GPUS
+        print("WARNING: number of gpus greater than the available one. Using all the gpus. Modify the config.ini file.")
 
     # Deterministic
     SEED = 1234
@@ -57,9 +59,9 @@ if __name__ == "__main__":
 
     parser.add_argument("--batch_size", type=int, default=None)
     parser.add_argument("--num_epochs", type=int, default=None)
-    parser.add_argument("--mode", type=str, default='small', help="Dimension of the network, options: small, large")
-    parser.add_argument("--dataset", type=str, default='cifar10', help="Dataset to use for training, options: cifar10, mnist")
-    parser.add_argument("--monitor", type=bool, default=False, help="Param to enable the wandb monitor, for cpu and gpu usage")
+    parser.add_argument("--mode", type=str, default='small', choices=NET_MODES, help="Dimension of the network, options: small, large")
+    parser.add_argument("--dataset", type=str, default='cifar10', choices=AVAIL_DATASETS, help="Dataset to use for training, options: cifar10, mnist")
+    parser.add_argument("-m", "--monitor", action="store_true", help="Param to enable the wandb monitor, for cpu and gpu usage")
 
     # Collect arguments
     args = parser.parse_args()
@@ -81,7 +83,6 @@ if __name__ == "__main__":
         # Check: https://wandb.ai/site
         try:
             import wandb
-
             try:
                 # 1. Start a new run
                 wandb.init(project=network_name)
@@ -157,3 +158,8 @@ if __name__ == "__main__":
 
     # Train the model ⚡⚡
     trainer.fit(model, train_loader, valid_loader)
+
+    
+    checkpoint_path = conf['paths']['checkpoint_path']
+    # Saves only on the main process
+    trainer.save_checkpoint(checkpoint_path+network_name)
