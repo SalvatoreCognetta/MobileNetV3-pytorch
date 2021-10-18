@@ -154,7 +154,7 @@ def conv2d_block(input_size:int, output_size:int, kernel_size:int, stride:int=1)
 
 
 class MobileNetV3(nn.Module):
-    def __init__(self, num_class:int, dropout:float, mode='small') -> None:
+    def __init__(self, num_class:int, dropout:float, rgb_img:bool, mode='small') -> None:
         super(MobileNetV3, self).__init__()
         self.num_class = num_class
         self.mode = mode
@@ -163,8 +163,8 @@ class MobileNetV3(nn.Module):
         self.bneck_specs = self.load_bneck_specs()
 
         # Generate all the net blocks
-        # TODO: changed here
-        self.net_blocks = [conv2d_block(input_size=1, output_size=16, kernel_size=3, stride=2)]
+        input_size = 3 if rgb_img else 1
+        self.net_blocks = [conv2d_block(input_size=input_size, output_size=16, kernel_size=3, stride=2)]
         self.build_bneck_blocks()
         self.build_last_layers()
 
@@ -224,15 +224,16 @@ class MobileNetV3(nn.Module):
 
 
 class MobileNetV3Module(pl.LightningModule):
-    def __init__(self, hparams, mode:str='small') -> None:
+    def __init__(self, hparams, rgb_img:bool, mode:str='small') -> None:
         super().__init__()
         self.save_hyperparameters(hparams)
+        self.rgb_img = rgb_img
         self.mode = mode
 
         # Enable manual optimization
         self.automatic_optimization = False
         
-        self.net = MobileNetV3(self.hparams.num_classes, self.hparams.dropout, self.mode)
+        self.net = MobileNetV3(self.hparams.num_classes, self.hparams.dropout, self.rgb_img, self.mode)
         
         self.criterion = nn.CrossEntropyLoss()
 
@@ -254,12 +255,12 @@ class MobileNetV3Module(pl.LightningModule):
     def training_step(self, batch, batch_idx) -> torch.Tensor:
         x, y = batch
         
-        # Get the optimizer for manual backward
-        opt = self.optimizers()
-
         # Compute the loss
         logits = self(x)
         loss = self.criterion(logits, y)
+
+        # Get the optimizer for manual backward
+        opt = self.optimizers()
 
         # Optimization step
         opt.zero_grad()
@@ -274,6 +275,11 @@ class MobileNetV3Module(pl.LightningModule):
         self.log_dict(metrics)
 
         return loss
+
+    
+    def training_epoch_end(self, outputs):
+        sch = self.lr_schedulers()
+        sch.step()
 
     def validation_step(self, batch, batch_idx) -> torch.Tensor:
         x, y = batch
@@ -314,11 +320,12 @@ class MobileNetV3Module(pl.LightningModule):
     #     return loss
 
     def configure_optimizers(self):
-        # optimizer = torch.optim.RMSprop(self.net.parameters(), lr=self.hparams.lr,
-        # 				momentum=self.hparams.momentum, weight_decay=self.hparams.weight_decay
-        			# )
+        optimizer = torch.optim.RMSprop(self.net.parameters(), lr=self.hparams.lr,
+        				momentum=self.hparams.momentum, weight_decay=self.hparams.weight_decay)
         # optimizer = torch.optim.SGD(self.net.parameters(), lr=self.hparams.lr, 
         #                 weight_decay=self.hparams.weight_decay)
+        lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=self.hparams.step_size, 
+                        gamma=self.hparams.lr_decay)
 
-        optimizer = torch.optim.Adam(self.net.parameters(), lr=self.hparams.lr)
-        return optimizer
+        # optimizer = torch.optim.Adam(self.net.parameters(), lr=self.hparams.lr)
+        return [optimizer], [lr_scheduler]

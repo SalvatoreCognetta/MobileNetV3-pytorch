@@ -59,6 +59,7 @@ if __name__ == "__main__":
     parser.add_argument("--num_epochs", type=int, default=None)
     parser.add_argument("--mode", type=str, default='small', help="Dimension of the network, options: small, large")
     parser.add_argument("--dataset", type=str, default='cifar10', help="Dataset to use for training, options: cifar10, mnist")
+    parser.add_argument("--monitor", type=bool, default=False, help="Param to enable the wandb monitor, for cpu and gpu usage")
 
     # Collect arguments
     args = parser.parse_args()
@@ -74,57 +75,83 @@ if __name__ == "__main__":
         MAX_EPOCHS = int(args.num_epochs)
     #-----------------------------------------
 
+    #----------------WandB Monitor----------------
+    if args.monitor:
+        # Used to monitor CPU and GPU utils
+        # Check: https://wandb.ai/site
+        try:
+            import wandb
+
+            try:
+                # 1. Start a new run
+                wandb.init(project=network_name)
+            except:
+                print("wandb not initialized, start a local web server by running the command: $ wandb local")
+                print("Running without wandb monitor...")
+        except:
+            print("wandb package not installed, install it via $ pip install wandb")
+            print("Running without wandb monitor...")
+    #---------------------------------------------
+
 
     #----------------Dataset----------------
+    rgb_img = True
     # Create the dataset
     if args.dataset == 'cifar10':
+        rgb_img = True # 3 channels
         cifar_path = conf['paths']['cifar_path']
         train_loader, valid_loader = setup_cifar10(cifar_path, BATCH_SIZE, NUM_WORKERS)
     elif args.dataset == 'mnist':
+        rgb_img = False # 1 channel
         mnist_path = conf['paths']['mnist_path']
         train_loader, valid_loader = setup_mnist(mnist_path, BATCH_SIZE, NUM_WORKERS)
     #--------------------------------------
-        
 
-    # Hyper-parameters
-    hparams = dotdict({
-        'num_classes': 10,
-        'dropout': 0.2,
-        'lr': 3e-4,
-        'weight_decay': 0.01,
-        'batch_size': BATCH_SIZE,
-        'momentum': 0.9,
-        'epochs': MAX_EPOCHS
-    })
 
+    #----------------Utilities----------------
     # Tensorboard Logger
     tb_logger = TensorBoardLogger("tb_logs", name=network_name)
 
     # Save best checkpoints at each epoch
     checkpoint_callback = ModelCheckpoint(
-        monitor='train_loss',
+        monitor='val_Accuracy',
         filename=network_name,
         save_top_k=1,
-        mode='min',
+        mode='max',
     )
 
     # Track training progresses and perform early stop
     early_stop_callback = EarlyStopping(
-        monitor='train_loss',
+        monitor='val_Accuracy',
         min_delta=0.00,
         patience=5,
         verbose=True,
-        mode='min'
+        mode='max'
     )
+    #-----------------------------------------
 
-    model = MobileNetV3Module(hparams, mode=args.mode)
+
+    # Hyper-parameters
+    hparams = dotdict({
+        'num_classes': 10,
+        'lr': 0.1,
+        'momentum': 0.9,
+        'dropout': 0.2,
+        'weight_decay': 1e-5,
+        'lr_decay':0.01,
+        'step_size': 3,
+        'batch_size': BATCH_SIZE,
+        'epochs': MAX_EPOCHS
+    })
+
+    model = MobileNetV3Module(hparams, rgb_img, mode=args.mode)
 
     # Initialize a trainer
     trainer = pl.Trainer(gpus=NUM_GPUS, accelerator=conf['trainer']['accelerator'], 
                         val_check_interval=1.0, max_epochs=MAX_EPOCHS, log_every_n_steps=20,\
                         progress_bar_refresh_rate=5, profiler='simple', \
-                        precision=16, logger=tb_logger, \
-                        callbacks=[checkpoint_callback,early_stop_callback]) 
+                         logger=tb_logger, \
+                        callbacks=[checkpoint_callback,early_stop_callback]) #precision=16,
 
     print("Precision: {}".format(trainer.precision))
 
