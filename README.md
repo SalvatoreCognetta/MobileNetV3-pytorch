@@ -1,6 +1,6 @@
 # Neural Network project - MobileNet3 implementation
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]()  
-[Papers with Code]([https://link](https://paperswithcode.com/method/mobilenetv3))
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](./notebooks/MobileNetv3.ipynb)  
+[Papers with Code](https://paperswithcode.com/method/mobilenetv3)
 
 # Prerequisites
 In order to run the python scripts the following programs are needed:
@@ -55,13 +55,16 @@ After this follow the instructions via terminal to setup the local webserver, ac
 To use multiple GPU, with dp or ddp for example, run the project using the scripts and not the notebooks ([ipython bug](https://github.com/ipython/ipython/issues/12396)).
 
 ```bash
-cd src
+tmux && cd src
 conda create -n <venv_name>
 conda activate <venv_name>
 pip install -r requirements.txt
 # Create and run the wandb docker image
 wandb local
-python train_model.py --mode='small' --dataset='mnist' --monitor=True
+# Split the terminal horizontally via Ctrl+B+" or open a new terminal
+python train_model.py --mode='small' --dataset='mnist' --monitor
+# Split the terminal horizontally via Ctrl+B+" or open a new terminal
+tensorboard --log_dir tb_logs
 ```
 
 Inside the `config.ini` file there are some configurations variables.
