@@ -9,7 +9,7 @@ from typing import List
 from dataclasses import dataclass, fields, astuple
 
 
-root_drive = '../'
+root_drive = './'
 
 spec_small_path = root_drive +  "specification/mobilenetv3-small.json"
 spec_large_path = root_drive +  "specification/mobilenetv3-large.json"
@@ -75,10 +75,10 @@ class SeModule(nn.Module):
         )
 
     def forward(self, x) -> torch.Tensor:
-        b, c, _, _ = x.size()
-        y = self.avg_pool(x).view(b, c)
-        y = self.se(y).view(b, c, 1, 1)
-        return x * y.expand_as(x)
+        batch, channels, _, _ = x.size()
+        out = self.avg_pool(x).view(batch, channels)
+        out = self.se(out).view(batch, channels, 1, 1)
+        return x * out.expand_as(x)
 
 
 
@@ -97,8 +97,6 @@ class SeModule(nn.Module):
 
 #     def forward(self, x):
 #         return x * self.se(x)
-
-
 
 
 class BottleNeck(nn.Module):
@@ -320,12 +318,13 @@ class MobileNetV3Module(pl.LightningModule):
     #     return loss
 
     def configure_optimizers(self):
-        optimizer = torch.optim.RMSprop(self.net.parameters(), lr=self.hparams.lr,
-        				momentum=self.hparams.momentum, weight_decay=self.hparams.weight_decay)
-        # optimizer = torch.optim.SGD(self.net.parameters(), lr=self.hparams.lr, 
+        # optimizer = torch.optim.RMSprop(self.net.parameters(), lr=self.hparams.lr,
+        # 				momentum=self.hparams.momentum, weight_decay=self.hparams.weight_decay)
+        # optimizer = torch.optim.Adam(self.net.parameters(), lr=self.hparams.lr,
         #                 weight_decay=self.hparams.weight_decay)
+        optimizer = torch.optim.SGD(self.net.parameters(), lr=self.hparams.lr, 
+                        weight_decay=self.hparams.weight_decay)
         lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=self.hparams.step_size, 
                         gamma=self.hparams.lr_decay)
 
-        # optimizer = torch.optim.Adam(self.net.parameters(), lr=self.hparams.lr)
         return [optimizer], [lr_scheduler]
