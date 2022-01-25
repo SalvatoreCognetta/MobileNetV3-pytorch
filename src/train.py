@@ -95,7 +95,7 @@ def run(args):
     
     # Hyper-parameters
     hparams = dotdict({
-        'num_classes': 10, # TODO change
+        'num_classes': 10,
         'lr': 0.1,
         'momentum': 0.9,
         'dropout': 0.8,

@@ -49,12 +49,12 @@ def setup_cifar10(cifar_path:str, batch_size:int, num_workers:int, download:bool
 
     train_loader = DataLoader(
         train_dataset, batch_size=batch_size, shuffle=True, 
-        num_workers=num_workers, pin_memory=True
+        num_workers=num_workers
     )
 
     valid_loader = DataLoader(
         valid_test_dataset, batch_size=batch_size, 
-        num_workers=num_workers, pin_memory=True
+        num_workers=num_workers
     )
     
     return train_loader, valid_loader

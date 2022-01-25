@@ -1,4 +1,8 @@
 src/__pycache__/*
-src/tb_logs/*
+tb_logs/*
 data/*
-src/wandb/*
+wandb/*
+lightning_logs/*
+mobilenetv3-large-cifar10_mobilenetv3-large-cifar10/*
+mobilenetv3-small-cifar10_mobilenetv3-small-cifar10/*
+mobilenetv3-small-mnist_mobilenetv3-small-mnist/*

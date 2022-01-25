@@ -1,5 +1,5 @@
-[2022-01-18 16:48:13,551 INFO @src.logger.base_logger] 19 - Running script at src.train
-[2022-01-18 16:48:14,833 DEBUG @src.logger.base_logger] 23 - Detected device: cuda
-[2022-01-18 16:48:14,834 INFO @src.logger.base_logger] 51 - CuDNN is enabled: True
-[2022-01-18 16:48:14,902 INFO @src.logger.base_logger] 157 - Precision: 32
-[2022-01-18 16:48:14,902 INFO @src.logger.base_logger] 158 - Train the mobilenetv3 model.
+[2022-01-21 18:13:44,574 INFO @src.logger.base_logger] 19 - Running script at src.train
+[2022-01-21 18:13:45,777 DEBUG @src.logger.base_logger] 23 - Detected device: cuda
+[2022-01-21 18:13:45,778 INFO @src.logger.base_logger] 51 - CuDNN is enabled: True
+[2022-01-21 18:13:46,751 INFO @src.logger.base_logger] 157 - Precision: 32
+[2022-01-21 18:13:46,751 INFO @src.logger.base_logger] 158 - Train the mobilenetv3 model.

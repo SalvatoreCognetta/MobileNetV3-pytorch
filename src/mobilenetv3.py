@@ -214,9 +214,6 @@ class MobileNetV3(nn.Module):
         self.net_blocks.append(nn.AdaptiveAvgPool2d(1)) # or  out = F.avg_pool2d(out, 7)
         self.net_blocks.append(nn.Conv2d(self.last_conv, self.last_channel, kernel_size=1, stride=1, padding=0))
         self.net_blocks.append(Hswish(inplace=True))
-        # should I add another layer?
-        # self.net_blocks.append(nn.Conv2d(self.last_channel, self.num_class, kernel_size=1, stride=1, padding=0))
-        # self.last_channel = self.num_class
 
 
 
@@ -255,6 +252,7 @@ class MobileNetV3Module(pl.LightningModule):
         
         # Compute the loss
         logits = self(x)
+        predictions = torch.argmax(logits, dim=1)
         loss = self.criterion(logits, y)
 
         # Get the optimizer for manual backward
@@ -268,7 +266,7 @@ class MobileNetV3Module(pl.LightningModule):
         self.log("train_loss", loss, prog_bar=True, logger=True)
 
         # Metrics: Accuracy, Precision, Recall, F1
-        metrics = self.train_metrics(logits, y)
+        metrics = self.train_metrics(predictions, y)
         # metrics are logged with keys: train_Accuracy, train_Precision, train_Recall and train_F1
         self.log_dict(metrics)
 
@@ -278,22 +276,24 @@ class MobileNetV3Module(pl.LightningModule):
     def training_epoch_end(self, outputs):
         sch = self.lr_schedulers()
         sch.step()
-
-    def validation_step(self, batch, batch_idx) -> torch.Tensor:
-        x, y = batch
+    
+    # Validation step is broken
+    # def validation_step(self, batch, batch_idx) -> torch.Tensor:
+    #     x, y = batch
         
-        # Compute the loss
-        logits = self(x)
-        loss = self.criterion(logits, y)
+    #     # Compute the loss
+    #     logits = self(x)
+    #     predictions = torch.argmax(logits, dim=1)
+    #     loss = self.criterion(logits, y)
 
-        self.log("val_loss", loss, prog_bar=True, logger=True)
+    #     self.log("val_loss", loss, prog_bar=True, logger=True)
 
-        # Metrics: Accuracy, Precision, Recall, F1
-        metrics = self.val_metrics(logits, y)
-        # metrics are logged with keys: val_Accuracy, val_Precision, val_Recall and val_F1
-        self.log_dict(metrics, logger=True)
+    #     # Metrics: Accuracy, Precision, Recall, F1
+    #     metrics = self.val_metrics(predictions, y)
+    #     # metrics are logged with keys: val_Accuracy, val_Precision, val_Recall and val_F1
+    #     self.log_dict(metrics, logger=True)
 
-        return loss
+    #     return loss
 
     # def validation_epoch_end(self, outputs) -> None:
     #     # Metrics on all full batch using custom accumulation
@@ -318,10 +318,15 @@ class MobileNetV3Module(pl.LightningModule):
     #     return loss
 
     def configure_optimizers(self):
+        # ! NOT WORKING
         # optimizer = torch.optim.RMSprop(self.net.parameters(), lr=self.hparams.lr,
         # 				momentum=self.hparams.momentum, weight_decay=self.hparams.weight_decay)
+        
+        # # For Cifar10
         # optimizer = torch.optim.Adam(self.net.parameters(), lr=self.hparams.lr,
         #                 weight_decay=self.hparams.weight_decay)
+
+        # For MNISt
         optimizer = torch.optim.SGD(self.net.parameters(), lr=self.hparams.lr, 
                         weight_decay=self.hparams.weight_decay)
         lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=self.hparams.step_size, 
