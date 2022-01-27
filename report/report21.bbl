@@ -252,5 +252,253 @@
     \field{type}{techreport}
     \field{year}{2009}
   \endentry
+
+  \entry{iandola2016squeezenet}{article}{}
+    \name{author}{6}{}{%
+      {{hash=IFN}{%
+         family={Iandola},
+         familyi={I\bibinitperiod},
+         given={Forrest\bibnamedelima N.},
+         giveni={F\bibinitperiod\bibinitdelim N\bibinitperiod},
+      }}%
+      {{hash=HS}{%
+         family={Han},
+         familyi={H\bibinitperiod},
+         given={Song},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=MMW}{%
+         family={Moskewicz},
+         familyi={M\bibinitperiod},
+         given={Matthew\bibnamedelima W.},
+         giveni={M\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+      {{hash=AK}{%
+         family={Ashraf},
+         familyi={A\bibinitperiod},
+         given={Khalid},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=DWJ}{%
+         family={Dally},
+         familyi={D\bibinitperiod},
+         given={William\bibnamedelima J.},
+         giveni={W\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=KK}{%
+         family={Keutzer},
+         familyi={K\bibinitperiod},
+         given={Kurt},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{IFN+1}
+    \strng{fullhash}{IFNHSMMWAKDWJKK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{eprint}
+    \verb 1602.07360
+    \endverb
+    \field{title}{SqueezeNet: AlexNet-level accuracy with 50x fewer parameters
+  and <0.5MB model size}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.CV}
+    \field{year}{2016}
+  \endentry
+
+  \entry{howard2017mobilenets}{article}{}
+    \name{author}{8}{}{%
+      {{hash=HAG}{%
+         family={Howard},
+         familyi={H\bibinitperiod},
+         given={Andrew\bibnamedelima G.},
+         giveni={A\bibinitperiod\bibinitdelim G\bibinitperiod},
+      }}%
+      {{hash=ZM}{%
+         family={Zhu},
+         familyi={Z\bibinitperiod},
+         given={Menglong},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=CB}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Bo},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=KD}{%
+         family={Kalenichenko},
+         familyi={K\bibinitperiod},
+         given={Dmitry},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=WW}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Weijun},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=WT}{%
+         family={Weyand},
+         familyi={W\bibinitperiod},
+         given={Tobias},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=AM}{%
+         family={Andreetto},
+         familyi={A\bibinitperiod},
+         given={Marco},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=AH}{%
+         family={Adam},
+         familyi={A\bibinitperiod},
+         given={Hartwig},
+         giveni={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HAG+1}
+    \strng{fullhash}{HAGZMCBKDWWWTAMAH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{eprint}
+    \verb 1704.04861
+    \endverb
+    \field{title}{MobileNets: Efficient Convolutional Neural Networks for
+  Mobile Vision Applications}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.CV}
+    \field{year}{2017}
+  \endentry
+
+  \entry{zhang2017shufflenet}{article}{}
+    \name{author}{4}{}{%
+      {{hash=ZX}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Xiangyu},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=ZX}{%
+         family={Zhou},
+         familyi={Z\bibinitperiod},
+         given={Xinyu},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=LM}{%
+         family={Lin},
+         familyi={L\bibinitperiod},
+         given={Mengxiao},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Sun},
+         familyi={S\bibinitperiod},
+         given={Jian},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZX+1}
+    \strng{fullhash}{ZXZXLMSJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{eprint}
+    \verb 1707.01083
+    \endverb
+    \field{title}{ShuffleNet: An Extremely Efficient Convolutional Neural
+  Network for Mobile Devices}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.CV}
+    \field{year}{2017}
+  \endentry
+
+  \entry{huang2018condensenet}{article}{}
+    \name{author}{4}{}{%
+      {{hash=HG}{%
+         family={Huang},
+         familyi={H\bibinitperiod},
+         given={Gao},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=LS}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Shichen},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=vdML}{%
+         prefix={van\bibnamedelima der},
+         prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod},
+         family={Maaten},
+         familyi={M\bibinitperiod},
+         given={Laurens},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=WKQ}{%
+         family={Weinberger},
+         familyi={W\bibinitperiod},
+         given={Kilian\bibnamedelima Q.},
+         giveni={K\bibinitperiod\bibinitdelim Q\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HG+1}
+    \strng{fullhash}{HGLSMLvdWKQ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{eprint}
+    \verb 1711.09224
+    \endverb
+    \field{title}{CondenseNet: An Efficient DenseNet using Learned Group
+  Convolutions}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.CV}
+    \field{year}{2018}
+  \endentry
+
+  \entry{yan2018shiftnet}{article}{}
+    \name{author}{5}{}{%
+      {{hash=YZ}{%
+         family={Yan},
+         familyi={Y\bibinitperiod},
+         given={Zhaoyi},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=LX}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Xiaoming},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=LM}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Mu},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=ZW}{%
+         family={Zuo},
+         familyi={Z\bibinitperiod},
+         given={Wangmeng},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=SS}{%
+         family={Shan},
+         familyi={S\bibinitperiod},
+         given={Shiguang},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{YZ+1}
+    \strng{fullhash}{YZLXLMZWSS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{eprint}
+    \verb 1801.09392
+    \endverb
+    \field{title}{Shift-Net: Image Inpainting via Deep Feature Rearrangement}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.CV}
+    \field{year}{2018}
+  \endentry
 \enddatalist
 \endinput

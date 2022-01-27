@@ -1,10 +1,13 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{Related works and solution}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Network search}{section.2}% 3
-\BOOKMARK [1][-]{section.3}{Implementation}{}% 4
-\BOOKMARK [2][-]{subsection.3.1}{Large}{section.3}% 5
-\BOOKMARK [2][-]{subsection.3.2}{Small}{section.3}% 6
-\BOOKMARK [2][-]{subsection.3.3}{Adroid app}{section.3}% 7
-\BOOKMARK [1][-]{section.4}{Results}{}% 8
-\BOOKMARK [1][-]{section.5}{Conclusion}{}% 9
-\BOOKMARK [1][-]{section*.2}{References}{}% 10
+\BOOKMARK [1][-]{section.2}{Related works}{}% 2
+\BOOKMARK [1][-]{section.3}{Solutions}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{MobileNetV3 Block}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Network search}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Nonlinearities}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{Implementation}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Adroid app}{section.4}% 8
+\BOOKMARK [1][-]{section.5}{Experiments and results}{}% 9
+\BOOKMARK [2][-]{subsection.5.1}{MNIST}{section.5}% 10
+\BOOKMARK [2][-]{subsection.5.2}{Cifar10}{section.5}% 11
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 12
+\BOOKMARK [1][-]{section*.6}{References}{}% 13

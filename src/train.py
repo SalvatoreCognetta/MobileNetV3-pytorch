@@ -22,9 +22,8 @@ from src.logger.base_logger import logger
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 logger.debug("Detected device: {}".format(DEVICE))
 
+AVAIL_CPUS = os.cpu_count() - 1 # Leave one for os
 AVAIL_GPUS = max(1, torch.cuda.device_count())
-# BATCH_SIZE = 512 if AVAIL_GPUS else 64
-# NUM_WORKERS = int(os.cpu_count() / 2)
 
 def run(args):
     #----------------Configuration----------------
@@ -38,6 +37,7 @@ def run(args):
     NUM_GPUS  = int(conf['trainer']['num_gpus'])
     MAX_EPOCHS  = int(conf['hparams']['num_epochs'])
 
+    if NUM_WORKERS > AVAIL_CPUS: NUM_WORKERS = AVAIL_CPUS
     if NUM_GPUS > AVAIL_GPUS: NUM_GPUS = AVAIL_GPUS
 
     # Deterministic

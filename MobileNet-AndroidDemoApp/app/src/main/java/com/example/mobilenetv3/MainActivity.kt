@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             predict("cifar10")
         }
 
-        predict("mnist")
+        predict("cifar10")
     }
 
     fun predict(type:String) {

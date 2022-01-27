@@ -4,6 +4,8 @@
 \usepackage[hmarginratio=1:1]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
+\graphicspath{ {./img/} }
+\usepackage{float}
 \usepackage{hyperref}
 \usepackage{subcaption}
 \usepackage{wrapfig}
@@ -23,15 +25,16 @@
 \clearpage
 \thispagestyle{empty}
 \vspace*{\fill}
+MobileNetV3 implementation for Neural Network course project, Artificial Intelligence and Robotics, Sapienza.
 \vspace*{\fill}
 \clearpage
 
 
 \tableofcontents
 
-\newpage
+\clearpage
     
-\newpage
+\clearpage
 \section{Introduction}
 Nell'ultimo decennio la potenza di device portatili di piccole dimensioni, come gli smartphone, è cresciuta in modo esponenziale, quasi a raggiungere potenze di low-budget computer. Questo ha fatto sì che si studiasse la possibilità di utilizzo di reti neurali su questi devices. \\
 Come sappiamo, utilizzare tecniche di machine learning è molto heavy load, per tale motivo è necessario fare delle assumptions prima di addentrarsi in questo modo. Allo stato attuale è impensabile effettuare il train su un singolo device mobile con così poca potenza wrt workstation e big datacenter utilizzate generalmente per il train delle reti. Anche se l'edge computing e la possibilità di utilizzare un'insieme di devices contemporaneamente anche per il train di reti neurali si fa sempre più insistente, in questo lavoro ci focalizziamo su un altro tipo di studio: nello specifico nell'utilizzo di lightweight reti neurali, appositamente ingegnerizzate, che vengono trainate a priori ma che possono essere utilizzate per fare inference proprio sui device mobili, come gli smartphone. \\
@@ -40,47 +43,104 @@ In questo senso, abbiamo deciso di implementare quella che è allo stato attuale
 The goal of the reference paper is to develop the best possible mobile computer vision architectures optimizing the accuracy-latency trade off on mobile devices. To accomplish this they introduce (1) complementary search techniques, (2) new efficient versions of nonlinearities practical for the mobile setting, (3) new efficient network design, (4) a new efficient segmentation decoder.\\
 In questo lavoro viene implementata la soluzione proposta in MobileNetV3 e applicata a due dataset differenti per image detection and classification: MNIST \cite{deng2012mnist} and CIFAR10 \cite{Krizhevsky09learningmultiple}.
 
-\section{Related works and solution}
-Tale lavoro, come già detto, è un evoluzione di MobileNetV2 alla ricerca di un modello quasi-ottimo per soluzioni con poca potenza computazionale. Per realizzare questa soluzione è ovviamente necessario raggiungere un punto di trade-off 
-In MobileNetV2 gli autori \\
+\section{Related works}
+Tale lavoro, come già detto, è un evoluzione di MobileNetV2 alla ricerca di un modello quasi-ottimo per soluzioni con poca potenza computazionale. Per realizzare questa soluzione è ovviamente necessario raggiungere un punto di trade-off tra l'accuratezza del modello e la complessità computazionale in fase di inferenza (efficienza). Both novel handcrafted structures and algorithmic neural architecture search have played important roles in advancing this field.\\
 
-SqueezeNet[22] extensively uses 1x1 convolutions with
-squeeze and expand modules primarily focusing on re-
-ducing the number of parameters. More recent works
-shifts the focus from reducing parameters to reducing
-the number of operations (MAdds) and the actual mea-
-sured latency. MobileNetV1[19] employs depthwise sepa-
-rable convolution to substantially improve computation ef-
-ficiency. MobileNetV2[39] expands on this by introducing
-a resource-efficient block with inverted residuals and lin-
-ear bottlenecks. ShuffleNet[49] utilizes group convolution
-and channel shuffle operations to further reduce the MAdds.
-CondenseNet[21] learns group convolutions at the training
-stage to keep useful dense connections between layers for
-feature re-use. ShiftNet[46] proposes the shift operation in-
-terleaved with point-wise convolutions to replace expensive
-spatial convolutions.
+For example, as stated by the authors, in SqueezeNet \cite{iandola2016squeezenet} 1x1 convolutions with squeeze and expand modules are extensively used, primarily focusing on reducing the number of parameters. More recent works shifts the focus from reducing parameters to reducing the number of operations (MAdds) and the actual measured latency. \\ 
+MobileNetV1 \cite{howard2017mobilenets} employs depthwise separable convolution to substantially improve computation efficiency; while MobileNetV2 \cite{sandler2019mobilenetv2} expands on this by introducing a resource-efficient block with inverted residuals and linear bottlenecks. \\
+More studies on the subject, like ShuffleNet \cite{zhang2017shufflenet}, CondenseNet \cite{huang2018condensenet} and ShiftNet \cite{yan2018shiftnet} were taken into account by the authors for the uses of group convolution at training phase and shift operation with point-wise convolutions in order to replace expensive spatial convolutions. \\
+
+Another major study performed regards the automatization of the architecture design search, which can be done using Reinforcement Learning to search efficient architectures with interesting and very good accuracy.\\
+Recently, the authors in MnasNet \cite{tan2019mnasnet} explored a block-level hierarchical search space allowing different layer structures at different resolution blocks of a network.\\
+
+\clearpage
+\section{Solutions}
+All these above mentioned ideas and studies are taken into account by the authors and used, together with other innovative proposal, reaching state of the art network for mobile devices, as explained in this section.
+
+\subsection{MobileNetV3 Block}
+block
 
 \subsection{Network search}
+block
+
+\subsection{Nonlinearities}
+As a replacement for the ReLU function, the swish nonlinearity is taken into account. It can be defined as 
+$$swish(x) = x \cdot \sigma(x)$$
+This nonlinearities improves the overall accuracy, however it's more expensive because of the sigmoid function, difficult to compute on mobile devices. \\
+For this reason it's replaced with its piece-wise linear hard analog:
+$$hswish(x) = x \frac{ReLU6(x+3)}{6}$$
+
+This hard version have no big differeces in terms of accuracy. A comparison beetwen them can be seen in figure \ref{fig:hswish_comparison}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\textwidth]{hswish}
+	\caption{Comparision between Sigmoid and swish function with their hard corrispective}
+	\label{fig:hswish_comparison}
+\end{figure}
 
 
-\newpage
+\clearpage
 \section{Implementation}
-\subsection{Large}
-\subsection{Small}
+The MobileNetV3 consists of two different design architectures, one used for high resources and another one for low resources, respectively Large and Small models. In this work both of them are implemented from scratch using pytorch and pytorch-lightning, framework used essentially to simplify multi-gpu training, using Distributed Data Parallel paradigm. \\
+Initially the implementation was done using Jupyter Notebooks, however cause of a bug regarding multi-gpu training, the implementation was completed using classical python script files. \\
+Both proposed model, small and large, were trained using the structure defined by the authors and replicated in the Figure~\ref{fig:specifications}.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.9\linewidth]{spec_large.png}
+		\caption{Large model}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.9\linewidth]{spec_small.png}
+		\caption{Small model}
+	\end{subfigure}
+	\caption{MobileNetV3 specifications for Large and Small model}
+	\label{fig:specifications}
+\end{figure}
+
 \subsection{Adroid app}
-% \subsection{Modim}
+After the training all the models are transformed in order to use them in an android workspace. The workflow followed for this operation can be seen in figure \ref{fig:pytorch_mobile}, which consists in the scripting of the model with the \textit{just in time} built-in pytorch compiler and the transformation of this to a model for pytorch lite.
 
-\newpage
-\section{Results}
-\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{pytorch-mobile.png}
+	\caption{Mobile deployment workflow: https://pytorch.org/mobile/home/}
+	\label{fig:pytorch_mobile}
+\end{figure}
+
+After this workflow as output we have a model that is ready to use inside a Android or iOS app. To make a demo, we created a simple app in Android Studio using Kotlin, in order to test the mobile version of the trained models.\\
+The app is very simple, as shown in the figure \ref{fig:demo_app}. In the main view the image to be predicted is shown, while on the bottom the prediction is set in a light grey box. There are two buttons, always on the bottom, one for Mnist and another one for Cifar10 image prediction. Both of them upload the needed model, put inside the asset folder, while a new image is randomly chosen inside the associated asset directory (\verb|asset/MNIST| or \verb|asset/Cifar10|).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{demo_app.png}
+	\caption{Android demo app}
+	\label{fig:demo_app}
+\end{figure}
+
+Even if this is only a demo app, it's noticeable that, without using model quantization and suitable optimization, there is a significant drop in model accuracy, underlying moreover the improvements that can be done using model inference on mobile devices.
+
+\clearpage
+\section{Experiments and results}
+The implementation of MobileNetV3 in this work is trained and test using two different datasets
+
+\subsection{MNIST}
+Lorem
+\subsection{Cifar10}
+Stride must be 1
+
+\clearpage
 
 
-\newpage
+\clearpage
 \section{Conclusion}
 
 
-\newpage
+\clearpage
 
 \nocite{*}
 \printbibliography[heading=bibintoc,title={References}]

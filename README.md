@@ -1,5 +1,4 @@
 # Neural Network project - MobileNet3 implementation
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](./notebooks/MobileNetv3.ipynb)  Preferred python scripts  
 [Papers with Code](https://paperswithcode.com/method/mobilenetv3)
 
 # Prerequisites
@@ -86,4 +85,7 @@ Inside the `config.ini` file there are some configurations variables.
 Use the [Notebook](./notebooks/convert_to_mobile.ipynb) to transform the trained model to pytorch lite model, usable inside an Android app or Simulator.
 
 ## Run the Android app Demo
-Launch the Android studio program and import the Project present in the repository. Change the checkpoints in the assets directories.
+Launch the Android studio program and import the Project present in the repository. Change the checkpoints in the assets directories.  
+<p align="center">
+  <img src="report/img/demo_app.png" />
+</p>
