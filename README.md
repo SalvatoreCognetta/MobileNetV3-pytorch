@@ -1,5 +1,4 @@
 # Neural Network project - MobileNet3 implementation
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](./notebooks/MobileNetv3.ipynb)  
 [Papers with Code](https://paperswithcode.com/method/mobilenetv3)
 
 # Prerequisites
@@ -68,3 +67,10 @@ tensorboard --log_dir tb_logs
 ```
 
 Inside the `config.ini` file there are some configurations variables.
+
+
+## Transform the checkpoint to pytorch lite
+Use the [Notebook](./notebooks/convert_to_mobile.ipynb) to transform the trained model to pytorch lite model, usable inside an Android app or Simulator.
+
+## Run the Android app Demo
+Launch the Android studio program and import the Project present in the repository. Change the checkpoints in the assets directories.

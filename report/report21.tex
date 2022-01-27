@@ -9,11 +9,10 @@
 \usepackage{wrapfig}
 \usepackage[inline]{enumitem}
 
-\title{Neural Network Project}
-\author{Daniele Appetito 1916560\\
- Salvatore Cognetta 1874383}
+\title{Neural Network Project - MobileNet v3}
+\author{Salvatore Cognetta 1874383}
         
-\date{September 2021}
+\date{January 2022}
 
 \begin{document}
 
@@ -24,7 +23,6 @@
 \clearpage
 \thispagestyle{empty}
 \vspace*{\fill}
-All the students contributed equally to the project.
 \vspace*{\fill}
 \clearpage
 
@@ -35,13 +33,42 @@ All the students contributed equally to the project.
     
 \newpage
 \section{Introduction}
+Nell'ultimo decennio la potenza di device portatili di piccole dimensioni, come gli smartphone, è cresciuta in modo esponenziale, quasi a raggiungere potenze di low-budget computer. Questo ha fatto sì che si studiasse la possibilità di utilizzo di reti neurali su questi devices. \\
+Come sappiamo, utilizzare tecniche di machine learning è molto heavy load, per tale motivo è necessario fare delle assumptions prima di addentrarsi in questo modo. Allo stato attuale è impensabile effettuare il train su un singolo device mobile con così poca potenza wrt workstation e big datacenter utilizzate generalmente per il train delle reti. Anche se l'edge computing e la possibilità di utilizzare un'insieme di devices contemporaneamente anche per il train di reti neurali si fa sempre più insistente, in questo lavoro ci focalizziamo su un altro tipo di studio: nello specifico nell'utilizzo di lightweight reti neurali, appositamente ingegnerizzate, che vengono trainate a priori ma che possono essere utilizzate per fare inference proprio sui device mobili, come gli smartphone. \\
+In questo senso, abbiamo deciso di implementare quella che è allo stato attuale la state of the art per questo tipo di reti e cioè MobileNetV3 \cite{howard2019searching}. Gli autori propongono due tipologie di reti, che vengono chiamate MobileNetV3 Small and Large. La prima si è un'evoluzione della rete MobileNetV2 \cite{sandler2019mobilenetv2}, mentre la seconda si basa sul lavoro contenuto in MnasNet-A1 \cite{tan2019mnasnet}. \\
+
+The goal of the reference paper is to develop the best possible mobile computer vision architectures optimizing the accuracy-latency trade off on mobile devices. To accomplish this they introduce (1) complementary search techniques, (2) new efficient versions of nonlinearities practical for the mobile setting, (3) new efficient network design, (4) a new efficient segmentation decoder.\\
+In questo lavoro viene implementata la soluzione proposta in MobileNetV3 e applicata a due dataset differenti per image detection and classification: MNIST \cite{deng2012mnist} and CIFAR10 \cite{Krizhevsky09learningmultiple}.
 
 \section{Related works and solution}
+Tale lavoro, come già detto, è un evoluzione di MobileNetV2 alla ricerca di un modello quasi-ottimo per soluzioni con poca potenza computazionale. Per realizzare questa soluzione è ovviamente necessario raggiungere un punto di trade-off 
+In MobileNetV2 gli autori \\
+
+SqueezeNet[22] extensively uses 1x1 convolutions with
+squeeze and expand modules primarily focusing on re-
+ducing the number of parameters. More recent works
+shifts the focus from reducing parameters to reducing
+the number of operations (MAdds) and the actual mea-
+sured latency. MobileNetV1[19] employs depthwise sepa-
+rable convolution to substantially improve computation ef-
+ficiency. MobileNetV2[39] expands on this by introducing
+a resource-efficient block with inverted residuals and lin-
+ear bottlenecks. ShuffleNet[49] utilizes group convolution
+and channel shuffle operations to further reduce the MAdds.
+CondenseNet[21] learns group convolutions at the training
+stage to keep useful dense connections between layers for
+feature re-use. ShiftNet[46] proposes the shift operation in-
+terleaved with point-wise convolutions to replace expensive
+spatial convolutions.
+
+\subsection{Network search}
+
 
 \newpage
 \section{Implementation}
-% \subsection{Softbank SDK simulator}
-% \subsection{Naoqi - Pepper tools}
+\subsection{Large}
+\subsection{Small}
+\subsection{Adroid app}
 % \subsection{Modim}
 
 \newpage

@@ -117,13 +117,13 @@ def run(args):
             save_dir="tb_logs",
             name=network_name,
         ), # TensorBoard Logger
-
-        WandbLogger(
+    ]
+    if args.monitor:
+        loggers += WandbLogger(
             project=network_name,
             config=hparams,
             log_model=True,
-        ), # Weight and Biases Logger
-    ]
+        ) # Weight and Biases Logger
 
     callbacks = [
         # Save best checkpoints at each epoch
