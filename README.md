@@ -1,4 +1,5 @@
 # Neural Network project - MobileNet3 implementation
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](./notebooks/MobileNetv3.ipynb)  Preferred python scripts  
 [Papers with Code](https://paperswithcode.com/method/mobilenetv3)
 
 # Prerequisites
@@ -61,7 +62,19 @@ pip install -r requirements.txt
 # Create and run the wandb docker image
 wandb local
 # Split the terminal horizontally via Ctrl+B+" or open a new terminal
-python train_model.py --mode='small' --dataset='mnist' --monitor
+python train_model.py --mode='<small/large>' --dataset='<dataset>' --monitor
+# Split the terminal horizontally via Ctrl+B+" or open a new terminal
+tensorboard --log_dir tb_logs
+```
+
+If you don't want to install docker/wandb logger:
+```bash
+tmux && cd src
+conda create -n <venv_name>
+conda activate <venv_name>
+pip install -r requirements.txt
+# Split the terminal horizontally via Ctrl+B+" or open a new terminal
+python train_model.py --mode='<small/large>' --dataset='<dataset>'
 # Split the terminal horizontally via Ctrl+B+" or open a new terminal
 tensorboard --log_dir tb_logs
 ```
