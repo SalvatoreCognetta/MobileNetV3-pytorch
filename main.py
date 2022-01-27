@@ -46,12 +46,7 @@ if __name__ == "__main__":
     parser.add_argument("--mode", type=str, choices=CONST.NET_MODES, default='small', help="Dimension of the network, options: small, large")
     parser.add_argument("--dataset", type=str, choices=CONST.AVAIL_DATASETS, default='cifar10', help=f"Dataset to use for training, options: {CONST.AVAIL_DATASETS}")
     parser.add_argument("--monitor", type=bool, default=False, help="Param to enable the wandb monitor, for cpu and gpu usage")
-
-    #----------------Test Arguments----------------
-    # parser.add_argument("--loss", type=str, choices=CONST.loss, default='sigma', help="Loss to be used")
-    # parser.add_argument("--rec_loss", type=str, choices=CONST.reconstrction_type, default='norm', help='Reconstruction loss metric to be used to compute reconstruction error')
-    # parser.add_argument("--zscore", action="store_true", help='Indicates if the z-scores must be used for the anomaly score computation')
-    # parser.add_argument("-s", "--save_report", action="store_true", help="Save the generated report")
+    parser.add_argument("--save_ckpt", type=bool, default=True, help="Set if the checkpoint must be saved or not, for testing.")
 
     # Collect arguments
     args = parser.parse_args()

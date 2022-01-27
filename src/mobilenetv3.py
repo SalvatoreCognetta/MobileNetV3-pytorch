@@ -82,22 +82,6 @@ class SeModule(nn.Module):
 
 
 
-# class SeModule(nn.Module):
-#     def __init__(self, in_size, reduction=4):
-#         super(SeModule, self).__init__()
-#         self.se = nn.Sequential(
-#             nn.AdaptiveAvgPool2d(1),
-#             nn.Conv2d(in_size, in_size // reduction, kernel_size=1, stride=1, padding=0, bias=False),
-#             nn.BatchNorm2d(in_size // reduction),
-#             nn.ReLU(inplace=True),
-#             nn.Conv2d(in_size // reduction, in_size, kernel_size=1, stride=1, padding=0, bias=False),
-#             nn.BatchNorm2d(in_size),
-#             hsigmoid()
-#         )
-
-#     def forward(self, x):
-#         return x * self.se(x)
-
 
 class BottleNeck(nn.Module):
     def __init__(self, spec:BNeckSpecification) -> None:
@@ -184,7 +168,6 @@ class MobileNetV3(nn.Module):
         return out
     
     def load_bneck_specs(self) -> List[BNeckSpecification]:
-        # TODO: remove path here and pass to init
         if self.mode == 'small':
             self.spec_file = spec_small_path
         else:
@@ -214,7 +197,6 @@ class MobileNetV3(nn.Module):
         self.net_blocks.append(nn.AdaptiveAvgPool2d(1)) # or  out = F.avg_pool2d(out, 7)
         self.net_blocks.append(nn.Conv2d(self.last_conv, self.last_channel, kernel_size=1, stride=1, padding=0))
         self.net_blocks.append(Hswish(inplace=True))
-
 
 
 
@@ -248,12 +230,12 @@ class MobileNetV3Module(pl.LightningModule):
         return self.net(x)
 
     def training_step(self, batch, batch_idx) -> torch.Tensor:
-        x, y = batch
+        data, label = batch
         
         # Compute the loss
-        logits = self(x)
+        logits = self(data)
         predictions = torch.argmax(logits, dim=1)
-        loss = self.criterion(logits, y)
+        loss = self.criterion(logits, label)
 
         # Get the optimizer for manual backward
         opt = self.optimizers()
@@ -266,11 +248,11 @@ class MobileNetV3Module(pl.LightningModule):
         self.log("train_loss", loss, prog_bar=True, logger=True)
 
         # Metrics: Accuracy, Precision, Recall, F1
-        metrics = self.train_metrics(predictions, y)
+        metrics = self.train_metrics(predictions, label)
         # metrics are logged with keys: train_Accuracy, train_Precision, train_Recall and train_F1
         self.log_dict(metrics)
 
-        return loss
+        return {"train_loss": loss}
 
     
     def training_epoch_end(self, outputs):
@@ -302,27 +284,10 @@ class MobileNetV3Module(pl.LightningModule):
     #     # Log the metrics
     #     self.log_dict(metrics, prog_bar=True, logger=True)
 
-    # def test_step(self, batch, batch_idx):
-    #     x, y = batch
-    #     # x = x.view(x.size(0), -1)
-    #     logits = self(x)
-    #     loss = self.criterion(logits, y)
-
-    #     self.log("test_loss", loss, prog_bar=True, logger=True)
-
-    #     # Metrics: Accuracy, Precision, Recall, F1
-    #     metrics = self.test_metrics(logits, y)
-    #     # metrics are logged with keys: test_Accuracy, test_Precision, test_Recall and test_F1
-    #     self.log_dict(metrics)
-        
-    #     return loss
 
     def configure_optimizers(self):
-        # ! NOT WORKING
-        # optimizer = torch.optim.RMSprop(self.net.parameters(), lr=self.hparams.lr,
-        # 				momentum=self.hparams.momentum, weight_decay=self.hparams.weight_decay)
-        
-        # # For Cifar10
+
+        # For Cifar10
         # optimizer = torch.optim.Adam(self.net.parameters(), lr=self.hparams.lr,
         #                 weight_decay=self.hparams.weight_decay)
 

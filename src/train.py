@@ -145,7 +145,7 @@ def run(args):
     ]
     #-----------------------------------------
 
-
+    # For CIFAR10 the stride of the first convolutional must be set to 1
     model = MobileNetV3Module(hparams, rgb_img, mode=args.mode)
 
     # Initialize a trainer
@@ -161,6 +161,7 @@ def run(args):
     # Train the model ⚡⚡
     trainer.fit(model, train_loader, valid_loader)
     
-    checkpoint_path = conf['paths']['checkpoint_path']
-    # Saves only on the main process
-    trainer.save_checkpoint(checkpoint_path+network_name)
+    if args.save_ckpt:
+        checkpoint_path = conf['paths']['checkpoint_path']
+        # Saves only on the main process
+        trainer.save_checkpoint(checkpoint_path+network_name)

@@ -1,13 +1,9 @@
 import os
 import random
 import torch
-import torchvision
+import matplotlib.pyplot as plt
 from tqdm import tqdm
-import pytorch_lightning as pl
-from torchvision import transforms
-from torch.utils.data import DataLoader
 import numpy as np
-import argparse
 import configparser
 
 from src.mobilenetv3 import MobileNetV3Module
@@ -69,50 +65,52 @@ def run(args):
     print(f"Loading checkpoint {checkpoint_name}")
     model = MobileNetV3Module.load_from_checkpoint(checkpoint_path="./checkpoints/"+checkpoint_name, rgb_img=rgb_img, mode=args.mode)
     # model.to(DEVICE)
-    # model.eval()
-    # torch.no_grad()
 
-    # get some random training images
     dataiter = iter(valid_loader)
+    print(f"Classes map: {valid_loader.dataset.class_to_idx}")
+    print(f"Classes: {valid_loader.dataset.classes}")
 
     # images, labels = dataiter.next()
     errors = 0
     num_of_items = 0
-    labels, y_pred = [], []
+    y_true, y_pred = [], []
 
     for image, label in tqdm(dataiter):
         predictions =  torch.argmax(model(image), dim=1)
         errors += label.shape[0] - torch.sum(predictions  == label)
         num_of_items += label.shape[0]
 
-        labels += label.tolist()
+        y_true += label.tolist()
         y_pred += predictions.tolist()
 
     print(f"Number of errors: {errors}/{num_of_items}")
 
     #importing confusion matrix
-    from sklearn.metrics import confusion_matrix
-    confusion = confusion_matrix(labels, y_pred)
+    from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+    confusion = confusion_matrix(y_true, y_pred)
     print('Confusion Matrix\n')
     print(confusion)
 
+    ConfusionMatrixDisplay.from_predictions(y_true, y_pred)
+    plt.show()
+
     #importing accuracy_score, precision_score, recall_score, f1_score
     from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-    print('\nAccuracy: {:.2f}\n'.format(accuracy_score(labels, y_pred)))
+    print('\nAccuracy: {:.2f}\n'.format(accuracy_score(y_true, y_pred)))
 
-    print('Micro Precision: {:.2f}'.format(precision_score(labels, y_pred, average='micro')))
-    print('Micro Recall: {:.2f}'.format(recall_score(labels, y_pred, average='micro')))
-    print('Micro F1-score: {:.2f}\n'.format(f1_score(labels, y_pred, average='micro')))
+    print('Micro Precision: {:.2f}'.format(precision_score(y_true, y_pred, average='micro')))
+    print('Micro Recall: {:.2f}'.format(recall_score(y_true, y_pred, average='micro')))
+    print('Micro F1-score: {:.2f}\n'.format(f1_score(y_true, y_pred, average='micro')))
 
-    print('Macro Precision: {:.2f}'.format(precision_score(labels, y_pred, average='macro')))
-    print('Macro Recall: {:.2f}'.format(recall_score(labels, y_pred, average='macro')))
-    print('Macro F1-score: {:.2f}\n'.format(f1_score(labels, y_pred, average='macro')))
+    print('Macro Precision: {:.2f}'.format(precision_score(y_true, y_pred, average='macro')))
+    print('Macro Recall: {:.2f}'.format(recall_score(y_true, y_pred, average='macro')))
+    print('Macro F1-score: {:.2f}\n'.format(f1_score(y_true, y_pred, average='macro')))
 
-    print('Weighted Precision: {:.2f}'.format(precision_score(labels, y_pred, average='weighted')))
-    print('Weighted Recall: {:.2f}'.format(recall_score(labels, y_pred, average='weighted')))
-    print('Weighted F1-score: {:.2f}'.format(f1_score(labels, y_pred, average='weighted')))
+    print('Weighted Precision: {:.2f}'.format(precision_score(y_true, y_pred, average='weighted')))
+    print('Weighted Recall: {:.2f}'.format(recall_score(y_true, y_pred, average='weighted')))
+    print('Weighted F1-score: {:.2f}'.format(f1_score(y_true, y_pred, average='weighted')))
 
-    # from sklearn.metrics import classification_report
-    # print('\nClassification Report\n')
-    # print(classification_report(labels, y_pred, target_names=['Class 1', 'Class 2', 'Class 3']))
+    from sklearn.metrics import classification_report
+    print('\nClassification Report\n')
+    print(classification_report(y_true, y_pred, target_names=valid_loader.dataset.classes))
 
