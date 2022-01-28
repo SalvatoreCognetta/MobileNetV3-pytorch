@@ -116,14 +116,20 @@ def run(args):
         TensorBoardLogger(
             save_dir="tb_logs",
             name=network_name,
-        ), # TensorBoard Logger
-    ]
-    if args.monitor:
-        loggers += WandbLogger(
+        ),
+        WandbLogger(
             project=network_name,
             config=hparams,
             log_model=True,
-        ) # Weight and Biases Logger
+        ) # TensorBoard Logger
+    ]
+    
+    # if args.monitor:
+    #     loggers.extend(WandbLogger(
+    #         project=network_name,
+    #         config=hparams,
+    #         log_model=True,
+    #     )) # Weight and Biases Logger
 
     callbacks = [
         # Save best checkpoints at each epoch
@@ -149,7 +155,7 @@ def run(args):
     model = MobileNetV3Module(hparams, rgb_img, mode=args.mode)
 
     # Initialize a trainer
-    trainer = pl.Trainer(gpus=NUM_GPUS, accelerator=conf['trainer']['accelerator'], 
+    trainer = pl.Trainer(#gpus=NUM_GPUS, accelerator=conf['trainer']['accelerator'], 
                         val_check_interval=1.0, max_epochs=MAX_EPOCHS, log_every_n_steps=20,\
                         progress_bar_refresh_rate=5, profiler='simple', \
                         logger=loggers, callbacks=callbacks) #precision=16,

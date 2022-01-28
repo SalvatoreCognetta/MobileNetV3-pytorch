@@ -59,7 +59,7 @@ def run(args):
         rgb_img = True # 3 channels
         cifar_path = conf['paths']['cifar_path']
         train_loader, valid_loader = setup_cifar10(cifar_path, BATCH_SIZE, NUM_WORKERS)
-        checkpoint_name = 'mobilenetv3-'+args.mode+'-cifar10_stride2.ckpt'
+        checkpoint_name = 'mobilenetv3-'+args.mode+'-cifar10.ckpt'
     elif args.dataset == 'mnist':
         rgb_img = False # 1 channel
         mnist_path = conf['paths']['mnist_path']

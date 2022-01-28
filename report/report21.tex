@@ -102,6 +102,16 @@ Both proposed model, small and large, were trained using the structure defined b
 	\label{fig:specifications}
 \end{figure}
 
+These specifications are stored inside two different json files, loaded before training the neural network to create the model architecture on the fly. Every row of the table \ref{fig:specifications} is associated to an object of the json file, containg:
+\begin{itemize}
+	\item the input and output size
+	\item kernel size
+	\item the stride size
+	\item expansion dimension
+	\item if the squeeze and excite must be used
+	\item the type of non-linearity to be used (ReLU or hard-swish)
+\end{itemize}
+
 \subsection{Adroid app}
 After the training all the models are transformed in order to use them in an android workspace. The workflow followed for this operation can be seen in figure \ref{fig:pytorch_mobile}, which consists in the scripting of the model with the \textit{just in time} built-in pytorch compiler and the transformation of this to a model for pytorch lite.
 
@@ -117,7 +127,7 @@ The app is very simple, as shown in the figure \ref{fig:demo_app}. In the main v
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{demo_app.png}
+	\includegraphics[width=0.4\textwidth]{demo_app.png}
 	\caption{Android demo app}
 	\label{fig:demo_app}
 \end{figure}
@@ -126,14 +136,114 @@ Even if this is only a demo app, it's noticeable that, without using model quant
 
 \clearpage
 \section{Experiments and results}
-The implementation of MobileNetV3 in this work is trained and test using two different datasets
+The implementation of MobileNetV3 in this work is trained and test using two different datasets: \verb|MNIST| and \verb|Cifar10|. \\
+Both of them are trained using normalization of the channels using Gaussian Normalization. Upsampling to a dimension of 224 width and 224 height is also needed for the images, considering the low quality of the networks.\\
+All the datasets are splitted in training and validation set, in a classical way to evaluate the network on never seen images and trying to not occurr in overfitting.
 
 \subsection{MNIST}
-Lorem
-\subsection{Cifar10}
-Stride must be 1
+The MNIST dataset consist in a collection of black and white (one channel) images of hand written digit.\\
+The classification of the MNIST dataset is a very simple task for this kind of networks, for this reason only the small version of MobileNetV3 is trained on this dataset.\\
+In this case a Gaussian Normalization with mean and standard deviation in $0.5$ is firstly applied, with some data augmentation using the transforms built-in function of the torchvision framework: random crop and random horizontal flip is applied to training dataset.\\
+The network is trained for 50 epochs.\\
+As we can see from Figure~\ref{fig:mnist_acc} the accuracy during training reaches high values after only 10 epochs, while in Figure~\ref{fig:mnist_loss} we can notice a complementar pattern for the training loss.\\
 
-\clearpage
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=.7\textwidth]{mnet_small_mnist_accuracy.png}
+	\caption{Mnist train accuracy}
+	\label{fig:mnist_acc}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=.7\textwidth]{mnet_small_mnist_loss.png}
+	\caption{Mnist train loss}
+	\label{fig:mnist_loss}
+\end{figure}
+
+After training the test dataset is used for evaluation, in this case we notice an overall test accuracy very high, about $0.95\%$. The associated classification report with all the evaluation metrics is shown in Figure~\ref{fig:mnist_class_report}.\\
+
+In the confusion matrix plotted in Figure~\ref{fig:mnist_cm} we can notice that the netwrok has an high sensitivity with the number $1$ while it struggles more with number $5$, confused often with numbers $2$ and $3$.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=.5\textwidth]{report_mnist_small.png}
+	\caption{Mnist classification report}
+	\label{fig:mnist_class_report}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{cm_mnist_small.png}
+	\caption{Mnist confusion matrix}
+	\label{fig:mnist_cm}
+\end{figure}
+
+
+
+\subsection{Cifar10}
+The Cifar10 dataset consist in a collection of rgb (three channels) images belonging to 3 different categories.\\
+This classification task is more complex than the MNIST one, for this reason in this work the train is done with both the networks architectures, Small and Large.\\
+Also in this case a Gaussian Normalization is used with mean in $[0.485, 0.456, 0.406]$ and standard deviation in $[0.247, 0.243, 0.261]$ is firstly applied. Like before, some data augmentation is applied: random crop and random horizontal flip is applied to training dataset.\\
+The network is trained for 25 epochs.\\
+\paragraph{Small} 
+As we can see from Figure~\ref{fig:cifar10_small_stride2_acc} the accuracy during training reaches not so good values, while in Figure~\ref{fig:cifar10_small_stride2_loss} we can notice a complementar pattern for the training loss.\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{mnet_small_cifar10_accuracy_stride2.png}
+	\caption{Cifar10 train accuracy using MobileNetV3 small and stride 2}
+	\label{fig:cifar10_small_stride2_acc}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{mnet_small_cifar10_loss_stride2.png}
+	\caption{Cifar10 train loss using MobileNetV3 small and stride 2}
+	\label{fig:cifar10_small_stride2_loss}
+\end{figure}
+
+This low training accuracy and loss is due to the datasets itself, it has very low image quality. An attempt to cut out this problem is done changing the stride of the first two convolutional layers. \\
+In the architecture proposed by the authors, trained on the ImageNet dataset, the stride is set to two, loosing some informations in the convolution operation. For this type of dataset the stride is changed to one resulting in less information loss and better results. \\
+In fact, as we can see from Figure~\ref{fig:cifar10_small_stride1_acc} and \ref{fig:cifar10_small_stride1_loss} the loss and accuracy gets better during training with this small change.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{mnet_small_cifar10_accuracy.png}
+	\caption{Cifar10 train accuracy using MobileNetV3 small and stride 1}
+	\label{fig:cifar10_small_stride1_acc}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{mnet_small_cifar10_loss.png}
+	\caption{Cifar10 train loss using MobileNetV3 small and stride 1}
+	\label{fig:cifar10_small_stride1_loss}
+\end{figure}
+
+As before, after training the test dataset is used for evaluation. In this case we notice an overall test accuracy very high, about $0.59\%$. The associated classification report with all the evaluation metrics is shown in Figure~\ref{fig:cifar10_small_stride1_report}.\\
+
+In the confusion matrix plotted in Figure~\ref{fig:cifar10_small_stride1_cm} we can notice that the netwrok has low sensitivity with the class associated to label $2,3,4$ associated respectively to cat, deer and dog images. The network, therefore, is often confused in the identification of images belonging to these classes.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.5\textwidth]{report_cifar10_small_stride1.png}
+	\caption{Cifar10 classification report using MobileNetV3 Small and stride 1}
+	\label{fig:cifar10_small_stride1_report}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{cm_cifar10_small_s1.png}
+	\caption{Cifar10 confusion matrix using MobileNetV3 Small and stride 1}
+	\label{fig:cifar10_small_stride1_cm}
+\end{figure}
+
+\paragraph{Large} 
+Similarly to the Small version of MobileNetV3, the dataset is used to train MobileNet Large. \\
+This time
+
+
 
 
 \clearpage
