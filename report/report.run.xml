@@ -44,11 +44,11 @@
   <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>report21.aux</file>
-      <file>report21-blx.bib</file>
+      <file>report.aux</file>
+      <file>report-blx.bib</file>
     </provides>
     <requires type="dynamic">
-      <file>report21.bbl</file>
+      <file>report.bbl</file>
     </requires>
     <requires type="static">
       <file>blx-dm.def</file>
@@ -67,20 +67,20 @@
     <cmdline>
       <binary>bibtex</binary>
       <option>-min-crossrefs 2</option>
-      <infile>report21</infile>
+      <infile>report</infile>
     </cmdline>
     <input>
-      <file>report21.aux</file>
+      <file>report.aux</file>
     </input>
     <output>
-      <file>report21.bbl</file>
+      <file>report.bbl</file>
     </output>
     <provides type="dynamic">
-      <file>report21.bbl</file>
+      <file>report.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>report21.aux</file>
-      <file>report21-blx.bib</file>
+      <file>report.aux</file>
+      <file>report-blx.bib</file>
     </requires>
     <requires type="editable">
       <file>ref.bib</file>

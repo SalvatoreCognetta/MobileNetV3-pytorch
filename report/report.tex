@@ -36,16 +36,16 @@ MobileNetV3 implementation for Neural Network course project, Artificial Intelli
     
 \clearpage
 \section{Introduction}
-In the last decade the mobile device, like smartphones, computational power is rapidly increased, almost reaching power of low-budget computer. This led to the study of the possibility of using neural networks on these devices.\\
-As it is known, using machine learning techniques is high demanding in terms of computation, for this reason it's needed to make some assumptions and observations before go into this applications. At the current state is unthinkable to train a complex neural network on a single mobile device with so low computational power, compared to dedicated hardware and data center typically used for this kind of task. Even if edge computing and the possibility of using a group of devices simultaneously also for neural network train can be an interesting field of study, this work is focused on the application and implementation of lightweight networks, expressly engineered, that are trained on dedicated hardware but can be used for inference on mobile devices, like smartphones.\\
+In the last decade the mobile device (like smartphones) computational power is rapidly increased, almost reaching power of low-budget computers. This led to the study of the possibility of using neural networks on these devices.\\
+As it is known, using machine learning techniques is high demanding in terms of computation, for this reason some assumptions and observations are needed before going into this applications. At the current state is unthinkable to train a complex neural network on a single mobile device with so low computational power, compared to dedicated hardware and data center typically used for this kind of task. Even if edge computing and the possibility of using a group of devices simultaneously also for neural network train can be an interesting field of study, this work is focused on the application and implementation of lightweight networks, expressly engineered, that are trained on dedicated hardware but can be used for inference on mobile devices, like smartphones.\\
 
-In this sense, the aim of this work is the implementation and uses of what is, at current state, the state of the art for this kind of networks: MobileNetV3 \cite{howard2019searching}. The authors proposed two kind of architectures, called MobileNetV3 Small and Large. The first one is the direct evolution of MobileNetV2 \cite{sandler2019mobilenetv2}, while the second one is based on the work expressed in MnasNet-A1 \cite{tan2019mnasnet}. \\
+In this sense, the aim of this work is the implementation and uses of what is the state of the art for this type of networks: MobileNetV3 \cite{howard2019searching}. The authors proposed two kind of architectures, called MobileNetV3 Small and Large. The first one is the direct evolution of MobileNetV2 \cite{sandler2019mobilenetv2}, while the second one is based on the work expressed in MnasNet-A1 \cite{tan2019mnasnet}. \\
 
 The goal of the reference paper is to develop the best possible mobile computer vision architectures optimizing the accuracy-latency trade off on mobile devices. To accomplish this they introduced (1) complementary search techniques, (2) new efficient versions of nonlinearities practical for the mobile setting, (3) new efficient network design, (4) a new efficient segmentation decoder.\\
 The solution proposed in MobileNetV3 is therefore implemented and applied to two different dataset for image detection and classification: MNIST \cite{deng2012mnist} and CIFAR10 \cite{Krizhevsky09learningmultiple}.
 
 \section{Related works}
-This work, as already said, is an evolution of MobileNetV2, trying to find a quasi-optimal model for devices for low computational power. To realize this solution a trade-off between accuracy of the model and its complessity during inference (efficiency) is obviously needed. Both novel handcrafted structures and algorithmic neural architecture search have played important roles in advancing this field.\\
+This work, as already said, is an evolution of MobileNetV2, searching a quasi-optimal model for devices for low computational power. To realize this solution, a trade-off between accuracy of the model and its complessity during inference (efficiency) is obviously needed. Both novel handcrafted structures and algorithmic neural architecture search have played important roles in advancing this field.\\
 
 For example, as stated by the authors, in SqueezeNet \cite{iandola2016squeezenet} 1x1 convolutions with squeeze and expand modules are extensively used, primarily focusing on reducing the number of parameters. More recent works shifts the focus from reducing parameters to reducing the number of operations (MAdds) and the actual measured latency. \\ 
 MobileNetV1 \cite{howard2017mobilenets} employs depthwise separable convolution to substantially improve computation efficiency; while MobileNetV2 \cite{sandler2019mobilenetv2} expands on this by introducing a resource-efficient block with inverted residuals and linear bottlenecks. \\
@@ -59,7 +59,7 @@ Recently, the authors in MnasNet \cite{tan2019mnasnet} explored a block-level hi
 All these above mentioned ideas and studies are taken into account by the authors and used, together with other innovative proposal, reaching state of the art network for mobile devices, as explained in this section.
 
 \subsection{MobileNetV3 Block}
-In the previous work done in MobileNetV2 the authors introduced a linear bottleneck and inverted residual structure in order to make an efficient layer structures by leveraging the low rank nature of the problem. This structure is defined by an 1x1 expansion convolution followed by depthwise convolutions and a 1x1 projection layer. The input and output are connected with a residual connection if and only if they have the same number of channels.\\
+In the previous work done in MobileNetV2 a linear bottleneck and inverted residual structure is introduced, in order to make an efficient layer structures by leveraging the low rank nature of the problem. This structure is defined by an 1x1 expansion convolution followed by depthwise convolutions and a 1x1 projection layer. The input and output are connected with a residual connection if and only if they have the same number of channels.\\
 Using these linear bottleneck in combination with lightweight attention modules based on squeeze and excitation into the bottleneck structure, introduced by MnasNet architecture, the final bottleneck output is defined in Figure~\ref{fig:bottle_neck}.
 
 \begin{figure}[H]
@@ -70,7 +70,7 @@ Using these linear bottleneck in combination with lightweight attention modules 
 \end{figure}
 
 \subsection{Network search}
-Another technology imployed by the authors for the architecture definition, is platform-aware Neural Architecture Search (NAS) to find the global network structures.
+Another technology imployed by the authors for the architecture definition is platform-aware Neural Architecture Search (NAS) to find the global network structures.\\
 The authors simply reuse the same MnasNet-A1 architecture as initial Large mobile model, and then apply NetAdapt and other optimizations on top of it.
 
 \subsection{Nonlinearities}

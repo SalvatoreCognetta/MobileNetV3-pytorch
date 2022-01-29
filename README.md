@@ -1,5 +1,7 @@
 # Neural Network project - MobileNet3 implementation
-[Papers with Code](https://paperswithcode.com/method/mobilenetv3)
+[Papers with Code](https://paperswithcode.com/method/mobilenetv3)  
+[Report](./report.pdf)  
+Implemenation of the network is inside the `src` folder.
 
 # Prerequisites
 In order to run the python scripts the following programs are needed:
