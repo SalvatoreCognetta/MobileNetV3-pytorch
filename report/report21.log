@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.11.23)  28 JAN 2022 21:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.11.23)  29 JAN 2022 01:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -571,12 +571,22 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  [3
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 39--42
+Underfull \hbox (badness 10000) in paragraph at lines 39--41
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 47--48
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--49
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 50--53
 
  []
 
@@ -584,177 +594,205 @@ Underfull \hbox (badness 10000) in paragraph at lines 47--48
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 49--52
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 53--55
+Underfull \hbox (badness 10000) in paragraph at lines 54--56
 
  []
 
 [5]
-<./img/hswish.png, id=117, 521.69907pt x 146.79843pt>
-File: ./img/hswish.png Graphic file (type png)
-<use ./img/hswish.png>
-Package pdftex.def Info: ./img/hswish.png  used on input line 77.
-(pdftex.def)             Requested size: 430.00462pt x 120.99818pt.
+<./img/bottle_neck.png, id=112, 581.17125pt x 212.29312pt>
+File: ./img/bottle_neck.png Graphic file (type png)
+<use ./img/bottle_neck.png>
+Package pdftex.def Info: ./img/bottle_neck.png  used on input line 67.
+(pdftex.def)             Requested size: 430.00462pt x 157.07501pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
+Overfull \hbox (8.06583pt too wide) in paragraph at lines 73--75
+\OT1/cmr/m/n/12 Another tech-nol-ogy im-ployed by the au-thors for the ar-chi-tec-ture def-i-ni-tion, is platform-
+ []
 
 [6
 
-] [7 <./img/hswish.png (PNG copy)>]
-<./img/spec_large.png, id=131, 569.12625pt x 532.23843pt>
+ <./img/bottle_neck.png (PNG copy)>]
+<./img/hswish.png, id=119, 521.69907pt x 146.79843pt>
+File: ./img/hswish.png Graphic file (type png)
+<use ./img/hswish.png>
+Package pdftex.def Info: ./img/hswish.png  used on input line 87.
+(pdftex.def)             Requested size: 430.00462pt x 120.99818pt.
+ [7 <./img/hswish.png (PNG copy)>]
+<./img/spec_large.png, id=129, 569.12625pt x 532.23843pt>
 File: ./img/spec_large.png Graphic file (type png)
 <use ./img/spec_large.png>
-Package pdftex.def Info: ./img/spec_large.png  used on input line 93.
+Package pdftex.def Info: ./img/spec_large.png  used on input line 103.
 (pdftex.def)             Requested size: 193.50075pt x 180.95866pt.
-<./img/spec_small.png, id=132, 578.16pt x 437.38406pt>
+<./img/spec_small.png, id=130, 578.16pt x 437.38406pt>
 File: ./img/spec_small.png Graphic file (type png)
 <use ./img/spec_small.png>
-Package pdftex.def Info: ./img/spec_small.png  used on input line 98.
+Package pdftex.def Info: ./img/spec_small.png  used on input line 108.
 (pdftex.def)             Requested size: 193.50075pt x 146.3794pt.
  [8
 
  <./img/spec_large.png (PNG copy)> <./img/spec_small.png (PNG copy)>]
-<./img/pytorch-mobile.png, id=142, 610.28pt x 727.71875pt>
+<./img/pytorch-mobile.png, id=140, 610.28pt x 727.71875pt>
 File: ./img/pytorch-mobile.png Graphic file (type png)
 <use ./img/pytorch-mobile.png>
-Package pdftex.def Info: ./img/pytorch-mobile.png  used on input line 120.
+Package pdftex.def Info: ./img/pytorch-mobile.png  used on input line 130.
 (pdftex.def)             Requested size: 258.00539pt x 307.66072pt.
  [9 <./img/pytorch-mobile.png>]
-<./img/demo_app.png, id=153, 308.65312pt x 654.19406pt>
+<./img/demo_app.png, id=151, 308.65312pt x 654.19406pt>
 File: ./img/demo_app.png Graphic file (type png)
 <use ./img/demo_app.png>
-Package pdftex.def Info: ./img/demo_app.png  used on input line 130.
+Package pdftex.def Info: ./img/demo_app.png  used on input line 140.
 (pdftex.def)             Requested size: 171.99922pt x 364.55936pt.
  [10 <./img/demo_app.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 144--149
+Underfull \hbox (badness 10000) in paragraph at lines 154--159
 
  []
 
-<./img/mnet_small_mnist_accuracy.png, id=162, 2537.48pt x 1332.98pt>
+<./img/mnet_small_mnist_accuracy.png, id=160, 2537.48pt x 1332.98pt>
 File: ./img/mnet_small_mnist_accuracy.png Graphic file (type png)
 <use ./img/mnet_small_mnist_accuracy.png>
-Package pdftex.def Info: ./img/mnet_small_mnist_accuracy.png  used on input line 152.
+Package pdftex.def Info: ./img/mnet_small_mnist_accuracy.png  used on input line 162.
 (pdftex.def)             Requested size: 301.00192pt x 158.12013pt.
-<./img/mnet_small_mnist_loss.png, id=163, 2537.48pt x 1332.98pt>
+<./img/mnet_small_mnist_loss.png, id=161, 2537.48pt x 1332.98pt>
 File: ./img/mnet_small_mnist_loss.png Graphic file (type png)
 <use ./img/mnet_small_mnist_loss.png>
-Package pdftex.def Info: ./img/mnet_small_mnist_loss.png  used on input line 159.
+Package pdftex.def Info: ./img/mnet_small_mnist_loss.png  used on input line 169.
 (pdftex.def)             Requested size: 301.00192pt x 158.12013pt.
 [11
 
  <./img/mnet_small_mnist_accuracy.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 164--165
+Underfull \hbox (badness 10000) in paragraph at lines 176--177
 
  []
 
-<./img/report_mnist_small.png, id=173, 319.1925pt x 435.12563pt>
-File: ./img/report_mnist_small.png Graphic file (type png)
-<use ./img/report_mnist_small.png>
-Package pdftex.def Info: ./img/report_mnist_small.png  used on input line 170.
-(pdftex.def)             Requested size: 215.0023pt x 293.09293pt.
-<./img/cm_mnist_small.png, id=174, 462.528pt x 346.896pt>
+<./img/cm_mnist_small.png, id=171, 462.528pt x 346.896pt>
 File: ./img/cm_mnist_small.png Graphic file (type png)
 <use ./img/cm_mnist_small.png>
-Package pdftex.def Info: ./img/cm_mnist_small.png  used on input line 177.
-(pdftex.def)             Requested size: 344.005pt x 258.01701pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [12 <./img/mnet_small_mnist_loss.png>]
-Overfull \vbox (59.63335pt too high) has occurred while \output is active []
-
- [13 <./img/report_mnist_small.png (PNG copy)> <./img/cm_mnist_small.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 185--189
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 190--191
+Package pdftex.def Info: ./img/cm_mnist_small.png  used on input line 180.
+(pdftex.def)             Requested size: 301.00192pt x 225.76025pt.
+<./img/report_mnist_small.png, id=172, 319.1925pt x 435.12563pt>
+File: ./img/report_mnist_small.png Graphic file (type png)
+<use ./img/report_mnist_small.png>
+Package pdftex.def Info: ./img/report_mnist_small.png  used on input line 187.
+(pdftex.def)             Requested size: 258.00539pt x 351.71948pt.
+[12 <./img/mnet_small_mnist_loss.png> <./img/cm_mnist_small.png>] [13 <./img/report_mnist_small.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 195--199
 
  []
 
-<./img/mnet_small_cifar10_accuracy_stride2.png, id=190, 2537.48pt x 1332.98pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--201
+
+ []
+
+<./img/mnet_small_cifar10_accuracy_stride2.png, id=188, 2537.48pt x 1332.98pt>
 File: ./img/mnet_small_cifar10_accuracy_stride2.png Graphic file (type png)
 <use ./img/mnet_small_cifar10_accuracy_stride2.png>
-Package pdftex.def Info: ./img/mnet_small_cifar10_accuracy_stride2.png  used on input line 194.
-(pdftex.def)             Requested size: 344.005pt x 180.6971pt.
-<./img/mnet_small_cifar10_loss_stride2.png, id=191, 2537.48pt x 1332.98pt>
+Package pdftex.def Info: ./img/mnet_small_cifar10_accuracy_stride2.png  used on input line 204.
+(pdftex.def)             Requested size: 301.00192pt x 158.12013pt.
+<./img/mnet_small_cifar10_loss_stride2.png, id=189, 2537.48pt x 1332.98pt>
 File: ./img/mnet_small_cifar10_loss_stride2.png Graphic file (type png)
 <use ./img/mnet_small_cifar10_loss_stride2.png>
-Package pdftex.def Info: ./img/mnet_small_cifar10_loss_stride2.png  used on input line 201.
-(pdftex.def)             Requested size: 344.005pt x 180.6971pt.
+Package pdftex.def Info: ./img/mnet_small_cifar10_loss_stride2.png  used on input line 211.
+(pdftex.def)             Requested size: 301.00192pt x 158.12013pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [14 <./img/mnet_small_cifar10_accuracy_stride2.png>]
-<./img/mnet_small_cifar10_accuracy.png, id=202, 2537.48pt x 1332.98pt>
+ [14
+
+ <./img/mnet_small_cifar10_accuracy_stride2.png>]
+<./img/mnet_small_cifar10_accuracy.png, id=200, 2537.48pt x 1332.98pt>
 File: ./img/mnet_small_cifar10_accuracy.png Graphic file (type png)
 <use ./img/mnet_small_cifar10_accuracy.png>
-Package pdftex.def Info: ./img/mnet_small_cifar10_accuracy.png  used on input line 212.
-(pdftex.def)             Requested size: 344.005pt x 180.6971pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [15 <./img/mnet_small_cifar10_loss_stride2.png>]
-<./img/mnet_small_cifar10_loss.png, id=210, 2537.48pt x 1332.98pt>
+Package pdftex.def Info: ./img/mnet_small_cifar10_accuracy.png  used on input line 222.
+(pdftex.def)             Requested size: 301.00192pt x 158.12013pt.
+<./img/mnet_small_cifar10_loss.png, id=201, 2537.48pt x 1332.98pt>
 File: ./img/mnet_small_cifar10_loss.png Graphic file (type png)
 <use ./img/mnet_small_cifar10_loss.png>
-Package pdftex.def Info: ./img/mnet_small_cifar10_loss.png  used on input line 219.
-(pdftex.def)             Requested size: 344.005pt x 180.6971pt.
+Package pdftex.def Info: ./img/mnet_small_cifar10_loss.png  used on input line 229.
+(pdftex.def)             Requested size: 258.00539pt x 135.52283pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 224--225
+Underfull \vbox (badness 3482) has occurred while \output is active []
 
- []
-
+ [15 <./img/mnet_small_cifar10_loss_stride2.png> <./img/mnet_small_cifar10_accuracy.png>]
+<./img/cm_cifar10_small_s1.png, id=212, 462.528pt x 346.896pt>
+File: ./img/cm_cifar10_small_s1.png Graphic file (type png)
+<use ./img/cm_cifar10_small_s1.png>
+Package pdftex.def Info: ./img/cm_cifar10_small_s1.png  used on input line 239.
+(pdftex.def)             Requested size: 301.00192pt x 225.76025pt.
 <./img/report_cifar10_small_stride1.png, id=213, 325.96782pt x 432.86719pt>
 File: ./img/report_cifar10_small_stride1.png Graphic file (type png)
 <use ./img/report_cifar10_small_stride1.png>
-Package pdftex.def Info: ./img/report_cifar10_small_stride1.png  used on input line 230.
-(pdftex.def)             Requested size: 215.0023pt x 285.52148pt.
-[16 <./img/mnet_small_cifar10_accuracy.png> <./img/mnet_small_cifar10_loss.png>]
-<./img/cm_cifar10_small_s1.png, id=222, 462.528pt x 346.896pt>
-File: ./img/cm_cifar10_small_s1.png Graphic file (type png)
-<use ./img/cm_cifar10_small_s1.png>
-Package pdftex.def Info: ./img/cm_cifar10_small_s1.png  used on input line 237.
-(pdftex.def)             Requested size: 344.005pt x 258.01701pt.
+Package pdftex.def Info: ./img/report_cifar10_small_stride1.png  used on input line 246.
+(pdftex.def)             Requested size: 258.00539pt x 342.64163pt.
+ [16 <./img/mnet_small_cifar10_loss.png> <./img/cm_cifar10_small_s1.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 253--255
+
+ []
+
+<./img/mnet_large_cifar10_accuracy_stride1.png, id=223, 2537.48pt x 1332.98pt>
+File: ./img/mnet_large_cifar10_accuracy_stride1.png Graphic file (type png)
+<use ./img/mnet_large_cifar10_accuracy_stride1.png>
+Package pdftex.def Info: ./img/mnet_large_cifar10_accuracy_stride1.png  used on input line 259.
+(pdftex.def)             Requested size: 301.00192pt x 158.12013pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [17 <./img/report_cifar10_small_stride1.png (PNG copy)>] [18 <./img/cm_cifar10_small_s1.png>] [19
+ [17 <./img/report_cifar10_small_stride1.png (PNG copy)>]
+<./img/mnet_large_cifar10_loss_stride1.png, id=230, 2537.48pt x 1332.98pt>
+File: ./img/mnet_large_cifar10_loss_stride1.png Graphic file (type png)
+<use ./img/mnet_large_cifar10_loss_stride1.png>
+Package pdftex.def Info: ./img/mnet_large_cifar10_loss_stride1.png  used on input line 266.
+(pdftex.def)             Requested size: 301.00192pt x 158.12013pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 271--272
+
+ []
+
+<./img/cm_cifar10_large_s1.png, id=233, 462.528pt x 346.896pt>
+File: ./img/cm_cifar10_large_s1.png Graphic file (type png)
+<use ./img/cm_cifar10_large_s1.png>
+Package pdftex.def Info: ./img/cm_cifar10_large_s1.png  used on input line 277.
+(pdftex.def)             Requested size: 344.005pt x 258.01701pt.
+
+Underfull \vbox (badness 1215) has occurred while \output is active []
+
+ [18 <./img/mnet_large_cifar10_accuracy_stride1.png> <./img/mnet_large_cifar10_loss_stride1.png>]
+<./img/report_cifar10_large_stride1.png, id=243, 320.69812pt x 438.13687pt>
+File: ./img/report_cifar10_large_stride1.png Graphic file (type png)
+<use ./img/report_cifar10_large_stride1.png>
+Package pdftex.def Info: ./img/report_cifar10_large_stride1.png  used on input line 284.
+(pdftex.def)             Requested size: 258.00539pt x 352.49553pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [19 <./img/cm_cifar10_large_s1.png>] [20 <./img/report_cifar10_large_stride1.png (PNG copy)>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 295.
+ [21
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 257.
- [20
-
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 257.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 295.
  (/home/salvatore/Documenti/MobileNetV3/report/report21.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 257.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 257.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 295.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 295.
 Package rerunfilecheck Info: File `report21.out' has not changed.
-(rerunfilecheck)             Checksum: 0FB53B0EB9668E00F4E68EB96C16BBF1;703.
+(rerunfilecheck)             Checksum: 7705969CA565F77DD97D93DB4BB75A9E;657.
 Package logreq Info: Writing requests to 'report21.run.xml'.
 \openout1 = `report21.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 14396 strings out of 483107
- 255669 string characters out of 5964629
- 710315 words of memory out of 5000000
- 29182 multiletter control sequences out of 15000+600000
+ 14431 strings out of 483107
+ 256931 string characters out of 5964629
+ 711748 words of memory out of 5000000
+ 29207 multiletter control sequences out of 15000+600000
  538659 words of font info for 45 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 48i,7n,46p,890b,1253s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,7n,46p,890b,1255s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/salvatore/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on /home/salvatore/Documenti/MobileNetV3/report/report21.pdf (20 pages, 1006822 bytes).
+Output written on /home/salvatore/Documenti/MobileNetV3/report/report21.pdf (21 pages, 1265156 bytes).
 PDF statistics:
- 299 PDF objects out of 1000 (max. 8388607)
- 241 compressed objects within 3 object streams
- 61 named destinations out of 1000 (max. 500000)
- 180 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 315 PDF objects out of 1000 (max. 8388607)
+ 248 compressed objects within 3 object streams
+ 66 named destinations out of 1000 (max. 500000)
+ 197 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -36,15 +36,16 @@ MobileNetV3 implementation for Neural Network course project, Artificial Intelli
     
 \clearpage
 \section{Introduction}
-Nell'ultimo decennio la potenza di device portatili di piccole dimensioni, come gli smartphone, è cresciuta in modo esponenziale, quasi a raggiungere potenze di low-budget computer. Questo ha fatto sì che si studiasse la possibilità di utilizzo di reti neurali su questi devices. \\
-Come sappiamo, utilizzare tecniche di machine learning è molto heavy load, per tale motivo è necessario fare delle assumptions prima di addentrarsi in questo modo. Allo stato attuale è impensabile effettuare il train su un singolo device mobile con così poca potenza wrt workstation e big datacenter utilizzate generalmente per il train delle reti. Anche se l'edge computing e la possibilità di utilizzare un'insieme di devices contemporaneamente anche per il train di reti neurali si fa sempre più insistente, in questo lavoro ci focalizziamo su un altro tipo di studio: nello specifico nell'utilizzo di lightweight reti neurali, appositamente ingegnerizzate, che vengono trainate a priori ma che possono essere utilizzate per fare inference proprio sui device mobili, come gli smartphone. \\
-In questo senso, abbiamo deciso di implementare quella che è allo stato attuale la state of the art per questo tipo di reti e cioè MobileNetV3 \cite{howard2019searching}. Gli autori propongono due tipologie di reti, che vengono chiamate MobileNetV3 Small and Large. La prima si è un'evoluzione della rete MobileNetV2 \cite{sandler2019mobilenetv2}, mentre la seconda si basa sul lavoro contenuto in MnasNet-A1 \cite{tan2019mnasnet}. \\
+In the last decade the mobile device, like smartphones, computational power is rapidly increased, almost reaching power of low-budget computer. This led to the study of the possibility of using neural networks on these devices.\\
+As it is known, using machine learning techniques is high demanding in terms of computation, for this reason it's needed to make some assumptions and observations before go into this applications. At the current state is unthinkable to train a complex neural network on a single mobile device with so low computational power, compared to dedicated hardware and data center typically used for this kind of task. Even if edge computing and the possibility of using a group of devices simultaneously also for neural network train can be an interesting field of study, this work is focused on the application and implementation of lightweight networks, expressly engineered, that are trained on dedicated hardware but can be used for inference on mobile devices, like smartphones.\\
 
-The goal of the reference paper is to develop the best possible mobile computer vision architectures optimizing the accuracy-latency trade off on mobile devices. To accomplish this they introduce (1) complementary search techniques, (2) new efficient versions of nonlinearities practical for the mobile setting, (3) new efficient network design, (4) a new efficient segmentation decoder.\\
-In questo lavoro viene implementata la soluzione proposta in MobileNetV3 e applicata a due dataset differenti per image detection and classification: MNIST \cite{deng2012mnist} and CIFAR10 \cite{Krizhevsky09learningmultiple}.
+In this sense, the aim of this work is the implementation and uses of what is, at current state, the state of the art for this kind of networks: MobileNetV3 \cite{howard2019searching}. The authors proposed two kind of architectures, called MobileNetV3 Small and Large. The first one is the direct evolution of MobileNetV2 \cite{sandler2019mobilenetv2}, while the second one is based on the work expressed in MnasNet-A1 \cite{tan2019mnasnet}. \\
+
+The goal of the reference paper is to develop the best possible mobile computer vision architectures optimizing the accuracy-latency trade off on mobile devices. To accomplish this they introduced (1) complementary search techniques, (2) new efficient versions of nonlinearities practical for the mobile setting, (3) new efficient network design, (4) a new efficient segmentation decoder.\\
+The solution proposed in MobileNetV3 is therefore implemented and applied to two different dataset for image detection and classification: MNIST \cite{deng2012mnist} and CIFAR10 \cite{Krizhevsky09learningmultiple}.
 
 \section{Related works}
-Tale lavoro, come già detto, è un evoluzione di MobileNetV2 alla ricerca di un modello quasi-ottimo per soluzioni con poca potenza computazionale. Per realizzare questa soluzione è ovviamente necessario raggiungere un punto di trade-off tra l'accuratezza del modello e la complessità computazionale in fase di inferenza (efficienza). Both novel handcrafted structures and algorithmic neural architecture search have played important roles in advancing this field.\\
+This work, as already said, is an evolution of MobileNetV2, trying to find a quasi-optimal model for devices for low computational power. To realize this solution a trade-off between accuracy of the model and its complessity during inference (efficiency) is obviously needed. Both novel handcrafted structures and algorithmic neural architecture search have played important roles in advancing this field.\\
 
 For example, as stated by the authors, in SqueezeNet \cite{iandola2016squeezenet} 1x1 convolutions with squeeze and expand modules are extensively used, primarily focusing on reducing the number of parameters. More recent works shifts the focus from reducing parameters to reducing the number of operations (MAdds) and the actual measured latency. \\ 
 MobileNetV1 \cite{howard2017mobilenets} employs depthwise separable convolution to substantially improve computation efficiency; while MobileNetV2 \cite{sandler2019mobilenetv2} expands on this by introducing a resource-efficient block with inverted residuals and linear bottlenecks. \\
@@ -58,10 +59,19 @@ Recently, the authors in MnasNet \cite{tan2019mnasnet} explored a block-level hi
 All these above mentioned ideas and studies are taken into account by the authors and used, together with other innovative proposal, reaching state of the art network for mobile devices, as explained in this section.
 
 \subsection{MobileNetV3 Block}
-block
+In the previous work done in MobileNetV2 the authors introduced a linear bottleneck and inverted residual structure in order to make an efficient layer structures by leveraging the low rank nature of the problem. This structure is defined by an 1x1 expansion convolution followed by depthwise convolutions and a 1x1 projection layer. The input and output are connected with a residual connection if and only if they have the same number of channels.\\
+Using these linear bottleneck in combination with lightweight attention modules based on squeeze and excitation into the bottleneck structure, introduced by MnasNet architecture, the final bottleneck output is defined in Figure~\ref{fig:bottle_neck}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{bottle_neck.png}
+	\caption{MobileNetV3 botlle-neck}
+	\label{fig:bottle_neck}
+\end{figure}
 
 \subsection{Network search}
-block
+Another technology imployed by the authors for the architecture definition, is platform-aware Neural Architecture Search (NAS) to find the global network structures.
+The authors simply reuse the same MnasNet-A1 architecture as initial Large mobile model, and then apply NetAdapt and other optimizations on top of it.
 
 \subsection{Nonlinearities}
 As a replacement for the ReLU function, the swish nonlinearity is taken into account. It can be defined as 
@@ -72,7 +82,7 @@ $$hswish(x) = x \frac{ReLU6(x+3)}{6}$$
 
 This hard version have no big differeces in terms of accuracy. A comparison beetwen them can be seen in figure \ref{fig:hswish_comparison}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{hswish}
 	\caption{Comparision between Sigmoid and swish function with their hard corrispective}
@@ -161,25 +171,25 @@ As we can see from Figure~\ref{fig:mnist_acc} the accuracy during training reach
 	\label{fig:mnist_loss}
 \end{figure}
 
+In the confusion matrix plotted in Figure~\ref{fig:mnist_cm} we can notice that the network has an high sensitivity with the number $1$ while it struggles more with number $5$, confused often with numbers $2$ and $3$.
+
 After training the test dataset is used for evaluation, in this case we notice an overall test accuracy very high, about $0.95\%$. The associated classification report with all the evaluation metrics is shown in Figure~\ref{fig:mnist_class_report}.\\
-
-In the confusion matrix plotted in Figure~\ref{fig:mnist_cm} we can notice that the netwrok has an high sensitivity with the number $1$ while it struggles more with number $5$, confused often with numbers $2$ and $3$.
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=.5\textwidth]{report_mnist_small.png}
-	\caption{Mnist classification report}
-	\label{fig:mnist_class_report}
-\end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.8\textwidth]{cm_mnist_small.png}
+	\includegraphics[width=.7\textwidth]{cm_mnist_small.png}
 	\caption{Mnist confusion matrix}
 	\label{fig:mnist_cm}
 \end{figure}
 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=.6\textwidth]{report_mnist_small.png}
+	\caption{Mnist classification report}
+	\label{fig:mnist_class_report}
+\end{figure}
 
+\clearpage
 
 \subsection{Cifar10}
 The Cifar10 dataset consist in a collection of rgb (three channels) images belonging to 3 different categories.\\
@@ -191,14 +201,14 @@ As we can see from Figure~\ref{fig:cifar10_small_stride2_acc} the accuracy durin
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.8\textwidth]{mnet_small_cifar10_accuracy_stride2.png}
+	\includegraphics[width=.7\textwidth]{mnet_small_cifar10_accuracy_stride2.png}
 	\caption{Cifar10 train accuracy using MobileNetV3 small and stride 2}
 	\label{fig:cifar10_small_stride2_acc}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.8\textwidth]{mnet_small_cifar10_loss_stride2.png}
+	\includegraphics[width=.7\textwidth]{mnet_small_cifar10_loss_stride2.png}
 	\caption{Cifar10 train loss using MobileNetV3 small and stride 2}
 	\label{fig:cifar10_small_stride2_loss}
 \end{figure}
@@ -209,45 +219,73 @@ In fact, as we can see from Figure~\ref{fig:cifar10_small_stride1_acc} and \ref{
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.8\textwidth]{mnet_small_cifar10_accuracy.png}
+	\includegraphics[width=.7\textwidth]{mnet_small_cifar10_accuracy.png}
 	\caption{Cifar10 train accuracy using MobileNetV3 small and stride 1}
 	\label{fig:cifar10_small_stride1_acc}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.8\textwidth]{mnet_small_cifar10_loss.png}
+	\includegraphics[width=.6\textwidth]{mnet_small_cifar10_loss.png}
 	\caption{Cifar10 train loss using MobileNetV3 small and stride 1}
 	\label{fig:cifar10_small_stride1_loss}
 \end{figure}
 
-As before, after training the test dataset is used for evaluation. In this case we notice an overall test accuracy very high, about $0.59\%$. The associated classification report with all the evaluation metrics is shown in Figure~\ref{fig:cifar10_small_stride1_report}.\\
-
-In the confusion matrix plotted in Figure~\ref{fig:cifar10_small_stride1_cm} we can notice that the netwrok has low sensitivity with the class associated to label $2,3,4$ associated respectively to cat, deer and dog images. The network, therefore, is often confused in the identification of images belonging to these classes.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.5\textwidth]{report_cifar10_small_stride1.png}
-	\caption{Cifar10 classification report using MobileNetV3 Small and stride 1}
-	\label{fig:cifar10_small_stride1_report}
-\end{figure}
+In the confusion matrix plotted in Figure~\ref{fig:cifar10_small_stride1_cm} we can notice that the network has low sensitivity with the class associated to label $2,3,4$ associated respectively to cat, deer and dog images. The network, therefore, is often confused in the identification of images belonging to these classes.\\
+As before, after training the test dataset is used for evaluation. In this case we notice an overall test accuracy quite good, about $0.59\%$. The associated classification report with all the evaluation metrics is shown in Figure~\ref{fig:cifar10_small_stride1_report}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.8\textwidth]{cm_cifar10_small_s1.png}
+	\includegraphics[width=.7\textwidth]{cm_cifar10_small_s1.png}
 	\caption{Cifar10 confusion matrix using MobileNetV3 Small and stride 1}
 	\label{fig:cifar10_small_stride1_cm}
 \end{figure}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\textwidth]{report_cifar10_small_stride1.png}
+	\caption{Cifar10 classification report using MobileNetV3 Small and stride 1}
+	\label{fig:cifar10_small_stride1_report}
+\end{figure}
+
+
 \paragraph{Large} 
 Similarly to the Small version of MobileNetV3, the dataset is used to train MobileNet Large. \\
-This time
+This time, using stride 1 for training, we can notice in Figure~\ref{fig:cifar10_large_stride1_acc} an increases to training accuracy with respect to the small counterpart.\\
 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.7\textwidth]{mnet_large_cifar10_accuracy_stride1.png}
+	\caption{Cifar10 train accuracy using MobileNetV3 Large and stride 1}
+	\label{fig:cifar10_large_stride1_acc}
+\end{figure}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.7\textwidth]{mnet_large_cifar10_loss_stride1.png}
+	\caption{Cifar10 train loss using MobileNetV3 Large and stride 2}
+	\label{fig:cifar10_large_stride1_loss}
+\end{figure}
 
-\clearpage
-\section{Conclusion}
+Using the Large architecture on this dataset, we notice a slight increase in performance by the network on the evaluation set, as expected and stated by the authors. In fact, we the overall test accuracy about $0.6\%$. The associated classification report with all the evaluation metrics is shown in Figure~\ref{fig:cifar10_large_stride1_report}.\\
+
+In the confusion matrix plotted in Figure~\ref{fig:cifar10_large_stride1_cm} we can notice that the network has increased its sensitivity within the  cat, deer and dog images, continuing to struggle more for the deer class. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{cm_cifar10_large_s1.png}
+	\caption{Cifar10 confusion matrix using MobileNetV3 Large and stride 1}
+	\label{fig:cifar10_large_stride1_cm}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.6\textwidth]{report_cifar10_large_stride1.png}
+	\caption{Cifar10 classification report using MobileNetV3 Large and stride 1}
+	\label{fig:cifar10_large_stride1_report}
+\end{figure}
+
 
 
 \clearpage
