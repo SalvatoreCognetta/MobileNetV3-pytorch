@@ -1,7 +1,8 @@
 # Neural Network project - MobileNet3 implementation
 [Papers with Code](https://paperswithcode.com/method/mobilenetv3)  
 [Report](./report.pdf)  
-Implemenation of the network is inside the `src` folder.
+Implemenation of the network is inside the `src` folder.  
+To convert the model in a pytorch lite version, usable in Android/iOS, check the dedicated [notebook](./notebooks/convert_to_mobile.ipynb).
 
 # Prerequisites
 In order to run the python scripts the following programs are needed:
@@ -63,7 +64,7 @@ pip install -r requirements.txt
 # Create and run the wandb docker image
 wandb local
 # Split the terminal horizontally via Ctrl+B+" or open a new terminal
-python train_model.py --mode='<small/large>' --dataset='<dataset>' --monitor
+python main.py --split <train/test> --mode <small/large> --dataset <mnist/cifar10> --monitor
 # Split the terminal horizontally via Ctrl+B+" or open a new terminal
 tensorboard --log_dir tb_logs
 ```
@@ -75,7 +76,7 @@ conda create -n <venv_name>
 conda activate <venv_name>
 pip install -r requirements.txt
 # Split the terminal horizontally via Ctrl+B+" or open a new terminal
-python train_model.py --mode='<small/large>' --dataset='<dataset>'
+python main.py --split <train/test> --mode <small/large> --dataset <mnist/cifar10>
 # Split the terminal horizontally via Ctrl+B+" or open a new terminal
 tensorboard --log_dir tb_logs
 ```
