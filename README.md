@@ -57,7 +57,7 @@ After this follow the instructions via terminal to setup the local webserver, ac
 To use multiple GPU, with dp or ddp for example, run the project using the scripts and not the notebooks ([ipython bug](https://github.com/ipython/ipython/issues/12396)).
 
 ```bash
-tmux && cd src
+tmux
 conda create -n <venv_name>
 conda activate <venv_name>
 pip install -r requirements.txt
@@ -71,7 +71,7 @@ tensorboard --log_dir tb_logs
 
 If you don't want to install docker/wandb logger:
 ```bash
-tmux && cd src
+tmux
 conda create -n <venv_name>
 conda activate <venv_name>
 pip install -r requirements.txt
